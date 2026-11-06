@@ -1,0 +1,82 @@
+<local:MyPageRight x:Class="PCL.PageToolsModFix"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:PCL"
+                   mc:Ignorable="d"
+                   PanScroll="{Binding ElementName=PanBack}">
+    <local:MyScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" x:Name="PanBack">
+        <StackPanel x:Name="PanMain" Margin="25,10">
+
+            <!-- 选择实例 -->
+            <local:MyCard Margin="0,15" Title="{DynamicResource Tools.ModFix.Select.Title}">
+                <StackPanel Margin="25,40,25,20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <local:MyComboBox x:Name="CmbInstance" Grid.Column="0" Height="30"
+                                          SelectionChanged="CmbInstance_SelectionChanged" />
+                        <local:MyTextButton Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"
+                                            Text="{DynamicResource Tools.ModFix.Select.Browse}"
+                                            Click="BtnBrowse_Click" />
+                    </Grid>
+                    <TextBlock x:Name="LabInfo" Margin="0,14,0,0" TextWrapping="Wrap" Opacity="0.65" FontSize="12" />
+                    <local:MyButton x:Name="BtnScan" MinWidth="150" HorizontalAlignment="Left" Margin="0,16,0,0"
+                                    Text="{DynamicResource Tools.ModFix.Action.Scan}" ColorType="Highlight"
+                                    Click="BtnScan_Click" />
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 检测结果 -->
+            <local:MyCard x:Name="CardResult" Margin="0,0,0,15" Title="{DynamicResource Tools.ModFix.Result.Title}"
+                          CanSwap="True" IsSwapped="True">
+                <StackPanel Margin="25,40,25,20">
+                    <TextBlock x:Name="LabSummary" TextWrapping="Wrap" />
+                    <TextBlock x:Name="LabStatus" Margin="0,8,0,0" TextWrapping="Wrap" Opacity="0.65" FontSize="12"
+                               Visibility="Collapsed" />
+                    <StackPanel x:Name="PanResults" Margin="0,14,0,0" />
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 修复操作 -->
+            <local:MyCard x:Name="CardAction" Margin="0,0,0,15" Title="{DynamicResource Tools.ModFix.Fix.Title}"
+                          Visibility="Collapsed">
+                <WrapPanel Margin="25,40,21,5" ItemHeight="42">
+                    <local:MyButton x:Name="BtnFixAll" MinWidth="160" Text="{DynamicResource Tools.ModFix.Fix.Selected}"
+                                    Margin="0,0,15,10" Click="BtnFixAll_Click" />
+                    <local:MyButton MinWidth="140" Text="{DynamicResource Common.Action.OpenFolder}"
+                                    Margin="0,0,15,10" Click="BtnOpenFolder_Click" />
+                    <local:MyButton MinWidth="140" Text="{DynamicResource Tools.ModFix.Action.CopyReport}"
+                                    Margin="0,0,15,10" Click="BtnCopyReport_Click" />
+                </WrapPanel>
+            </local:MyCard>
+
+            <!-- CurseForge 回退（可选） -->
+            <local:MyCard x:Name="CardCurseForge" Margin="0,0,0,15"
+                          Title="{DynamicResource Tools.ModFix.CurseForge.Title}" CanSwap="True" IsSwapped="True">
+                <StackPanel Margin="25,40,25,20">
+                    <TextBlock Text="{DynamicResource Tools.ModFix.CurseForge.Description}" TextWrapping="Wrap"
+                               Opacity="0.75" FontSize="12" />
+                    <Grid Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <local:MyTextBox x:Name="TextCurseForgeKey" Grid.Column="0" Height="30"
+                                         HintText="{DynamicResource Tools.ModFix.CurseForge.KeyHint}"
+                                         TextChanged="TextCurseForgeKey_TextChanged" />
+                        <local:MyButton Grid.Column="1" Margin="10,0,0,0" MinWidth="110" Height="30"
+                                        Text="{DynamicResource Tools.ModFix.CurseForge.GetKey}"
+                                        Click="BtnGetKey_Click" />
+                    </Grid>
+                    <TextBlock x:Name="LabKeyStatus" Margin="0,8,0,0" TextWrapping="Wrap" Opacity="0.6"
+                               FontSize="12" />
+                </StackPanel>
+            </local:MyCard>
+
+        </StackPanel>
+    </local:MyScrollViewer>
+</local:MyPageRight>
