@@ -26,13 +26,13 @@
         <!-- 公告栏：悬浮在启动页右上角 -->
         <local:MyCard x:Name="PanAnnouncement"
                       HorizontalAlignment="Right" VerticalAlignment="Top"
-                      Width="320" Margin="0,18,18,0" Panel.ZIndex="20"
+                      Width="340" Margin="0,18,18,0" Panel.ZIndex="20"
                       Title="{DynamicResource Launch.Announcement.Title}"
                       Visibility="Collapsed">
             <local:MyIconButton x:Name="BtnAnnouncementCollapse"
                                 Width="20" Height="20" Margin="0,12,8,0" LogoScale="0.8"
                                 HorizontalAlignment="Right" VerticalAlignment="Top"
-                                SvgIcon="lucide/chevron-up"
+                                SvgIcon="lucide/arrow-up-to-line"
                                 ToolTip="{DynamicResource Launch.Announcement.Collapse}"
                                 Click="BtnAnnouncementCollapse_Click" />
             <StackPanel Margin="18,38,14,12">
@@ -53,7 +53,7 @@
         <local:MyIconButton x:Name="BtnAnnouncementExpand"
                             HorizontalAlignment="Right" VerticalAlignment="Top"
                             Width="34" Height="34" Margin="0,18,18,0" Panel.ZIndex="20"
-                            SvgIcon="lucide/megaphone"
+                            SvgIcon="lucide/message-circle"
                             ToolTip="{DynamicResource Launch.Announcement.Expand}"
                             Click="BtnAnnouncementExpand_Click"
                             Visibility="Collapsed" />

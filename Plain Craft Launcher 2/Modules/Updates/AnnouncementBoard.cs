@@ -128,6 +128,18 @@ public static class AnnouncementBoard
 
     private static string FetchJson()
     {
+        // 允许通过环境变量指向自建镜像或本地调试地址
+        var overrideUrl = Environment.GetEnvironmentVariable("PCL_ANNOUNCEMENT_URL");
+        if (!string.IsNullOrWhiteSpace(overrideUrl))
+        {
+            ModBase.Log($"[Announcement] 使用覆盖的公告地址：{overrideUrl}");
+            return Requester.FetchString(overrideUrl, new RequestParam
+            {
+                Timeout = 15000,
+                Retries = 1
+            });
+        }
+
         var repository = ResolveRepository();
         Exception? lastError = null;
 

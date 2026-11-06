@@ -151,31 +151,36 @@ public partial class PageLaunchRight : IRefreshable
         var stack = new StackPanel();
         Grid.SetColumn(stack, 2);
 
-        var titleRow = new StackPanel { Orientation = Orientation.Horizontal };
         var title = new TextBlock
         {
             Text = item.Title,
             FontSize = 13.5,
             FontWeight = item.IsNew ? FontWeights.Bold : FontWeights.Normal,
-            TextTrimming = TextTrimming.CharacterEllipsis,
             TextWrapping = TextWrapping.Wrap,
-            MaxHeight = 40
+            MaxHeight = 42,
+            LineHeight = 20
         };
         title.SetResourceReference(TextBlock.ForegroundProperty, "ColorBrush1");
-        titleRow.Children.Add(title);
+        stack.Children.Add(title);
+
+        // 副行：置顶标记 + 时间 + 未读圆点
+        var meta = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            Margin = new Thickness(0, 5, 0, 0)
+        };
 
         if (item.IsNew)
         {
-            var dot = new Border
+            meta.Children.Add(new Border
             {
                 Width = 6,
                 Height = 6,
                 CornerRadius = new CornerRadius(3),
                 Background = new SolidColorBrush(accent),
-                Margin = new Thickness(6, 2, 0, 0),
+                Margin = new Thickness(0, 5, 6, 0),
                 VerticalAlignment = VerticalAlignment.Top
-            };
-            titleRow.Children.Add(dot);
+            });
         }
 
         if (item.Pinned)
@@ -183,24 +188,22 @@ public partial class PageLaunchRight : IRefreshable
             var pin = new TextBlock
             {
                 Text = Lang.Text("Launch.Announcement.Pinned"),
-                FontSize = 10,
-                Margin = new Thickness(6, 2, 0, 0),
-                VerticalAlignment = VerticalAlignment.Top
+                FontSize = 10.5,
+                Margin = new Thickness(0, 0, 8, 0)
             };
             pin.SetResourceReference(TextBlock.ForegroundProperty, "ColorBrushGray3");
-            titleRow.Children.Add(pin);
+            meta.Children.Add(pin);
         }
-
-        stack.Children.Add(titleRow);
 
         var sub = new TextBlock
         {
             Text = string.IsNullOrWhiteSpace(item.Time) ? "" : item.Time,
-            FontSize = 10.5,
-            Margin = new Thickness(0, 3, 0, 0)
+            FontSize = 10.5
         };
         sub.SetResourceReference(TextBlock.ForegroundProperty, "ColorBrushGray3");
-        stack.Children.Add(sub);
+        meta.Children.Add(sub);
+
+        stack.Children.Add(meta);
 
         root.Children.Add(stack);
         root.MouseLeftButtonUp += (_, e) =>
