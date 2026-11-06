@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updated": "2026-11-06T21:37:53Z",
+  "updated": "2026-11-06T21:39:57Z",
   "items": [
     {
       "id": "20261107-01",
-      "title": "ggg",
-      "content": "awgggawgwawgawawgwg",
+      "title": "公告测试",
+      "content": "公告测试",
       "level": "info",
       "pinned": false,
-      "time": "2026-11-07 05:37",
+      "time": "2026-11-07 05:39",
       "expire": ""
     }
   ]
