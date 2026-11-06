@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "updated": "2026-11-07T05:00:00Z",
+  "items": [
+    {
+      "id": "20261107-01",
+      "title": "PCL-CEX 2.15.2 已发布：启动页新增公告栏",
+      "content": "本次更新给启动页右上角加了**公告栏**，以后启动器相关的通知都会显示在这里。\n\n### 本次更新\n\n- 启动页右上角新增公告栏：置顶、等级色条、未读标记、可收起\n- 公告内容从 GitHub 仓库读取，推送后无需更新启动器即可看到\n- 点击公告可以查看完整内容（支持 Markdown）\n- 引擎：更新源仍然直连 GitHub Releases，无需第三方分发\n\n### 下载\n\n[前往 Releases 页面下载最新版本](https://github.com/12112-boop/PCL-CEX/releases)\n\n> 旧版本可以在「设置 → 更新」里一键检查更新。",
+      "level": "important",
+      "pinned": true,
+      "time": "2026-11-07 05:00",
+      "expire": ""
+    }
+  ]
+}

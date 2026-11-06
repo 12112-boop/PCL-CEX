@@ -1,4 +1,4 @@
-﻿<!-- Formatted by xaml-lang-formatter at 2026-06-28T17:16:52. -->
+<!-- Formatted by xaml-lang-formatter at 2026-06-28T17:16:52. -->
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -1519,6 +1519,12 @@
     <sys:String x:Key="Launch.Right.CommunityHint.Title">PCL-CEX notice</sys:String>
     <sys:String x:Key="Launch.Right.CommunityHint.WrongInput">Not quite right...</sys:String>
     <sys:String x:Key="Launch.Right.Log.Title">Launch log</sys:String>
+    <sys:String x:Key="Launch.Announcement.Title">Announcements</sys:String>
+    <sys:String x:Key="Launch.Announcement.Empty">No announcements</sys:String>
+    <sys:String x:Key="Launch.Announcement.Collapse">Collapse announcements</sys:String>
+    <sys:String x:Key="Launch.Announcement.Expand">Expand announcements</sys:String>
+    <sys:String x:Key="Launch.Announcement.Pinned">Pinned</sys:String>
+    <sys:String x:Key="Launch.Announcement.More">{0} more announcement(s) not shown</sys:String>
 
     <!-- Launch.Account -->
 

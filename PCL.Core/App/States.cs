@@ -124,6 +124,16 @@ public static partial class States
         [ConfigItem<string>("SystemSystemAnnouncement", "")] public partial string ShowedAnnouncements { get; set; }
 
         /// <summary>
+        /// 公告栏中已读的公告 ID（以 | 分隔）。
+        /// </summary>
+        [ConfigItem<string>("UiAnnouncementBoardRead", "")] public partial string ReadAnnouncements { get; set; }
+
+        /// <summary>
+        /// 启动页公告栏是否被用户折叠。
+        /// </summary>
+        [ConfigItem<bool>("UiAnnouncementBoardCollapsed", false)] public partial bool AnnouncementBoardCollapsed { get; set; }
+
+        /// <summary>
         /// 数据包更新警告。
         /// </summary>
         [ConfigItem<bool>("HintDatapackUpdate",false)] public partial bool FunctionDatapackUpdate { get; set; }

@@ -1519,6 +1519,12 @@
     <sys:String x:Key="Launch.Right.CommunityHint.Title">PCL-CEX 提示</sys:String>
     <sys:String x:Key="Launch.Right.CommunityHint.WrongInput">不太对哦……</sys:String>
     <sys:String x:Key="Launch.Right.Log.Title">启动日志</sys:String>
+    <sys:String x:Key="Launch.Announcement.Title">公告</sys:String>
+    <sys:String x:Key="Launch.Announcement.Empty">暂无公告</sys:String>
+    <sys:String x:Key="Launch.Announcement.Collapse">收起公告栏</sys:String>
+    <sys:String x:Key="Launch.Announcement.Expand">展开公告栏</sys:String>
+    <sys:String x:Key="Launch.Announcement.Pinned">置顶</sys:String>
+    <sys:String x:Key="Launch.Announcement.More">还有 {0} 条公告未显示</sys:String>
 
     <!-- Launch.Account -->
 

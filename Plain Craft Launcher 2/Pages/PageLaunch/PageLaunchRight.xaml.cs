@@ -1,8 +1,9 @@
-﻿using System.IO;
+using System.IO;
 using System.Globalization;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using PCL.Core.App;
@@ -41,7 +42,206 @@ public partial class PageLaunchRight : IRefreshable
         LabHint1.Text = Lang.Text("Launch.Right.CommunityHint.Message");
         LabHint2.Text = Lang.Text("Launch.Right.CommunityHint.HidePrompt");
         _EnsureHomepageLiveWatcher();
+        InitAnnouncementBoard();
     }
+
+    #region 公告栏
+
+    private bool _announcementSubscribed;
+
+    /// <summary>
+    ///     初始化右上角公告栏。必须在 UI 线程调用。
+    /// </summary>
+    private void InitAnnouncementBoard()
+    {
+        if (!_announcementSubscribed)
+        {
+            _announcementSubscribed = true;
+            AnnouncementBoard.Updated += OnAnnouncementUpdated;
+            AnnouncementBoard.LoadOnStartup();
+        }
+
+        RefreshAnnouncementUi();
+    }
+
+    private void OnAnnouncementUpdated()
+    {
+        ModBase.RunInUi(RefreshAnnouncementUi);
+    }
+
+    /// <summary>根据当前公告与折叠状态重建公告栏。</summary>
+    private void RefreshAnnouncementUi()
+    {
+        try
+        {
+            var items = AnnouncementBoard.Items;
+            var collapsed = States.Hint.AnnouncementBoardCollapsed;
+
+            PanAnnouncementList.Children.Clear();
+
+            if (items.Count == 0)
+            {
+                PanAnnouncement.Visibility = Visibility.Collapsed;
+                BtnAnnouncementExpand.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            if (collapsed)
+            {
+                PanAnnouncement.Visibility = Visibility.Collapsed;
+                BtnAnnouncementExpand.Visibility = Visibility.Visible;
+                return;
+            }
+
+            BtnAnnouncementExpand.Visibility = Visibility.Collapsed;
+            PanAnnouncement.Visibility = Visibility.Visible;
+
+            var shown = items.Take(4).ToList();
+            for (var i = 0; i < shown.Count; i++)
+            {
+                if (i > 0)
+                    PanAnnouncementList.Children.Add(new Border
+                    {
+                        Height = 1,
+                        Margin = new Thickness(0, 6, 0, 6),
+                        Background = (Brush)Application.Current.FindResource("ColorBrush8")
+                    });
+                PanAnnouncementList.Children.Add(BuildAnnouncementRow(shown[i]));
+            }
+
+            LabAnnouncementEmpty.Visibility = Visibility.Collapsed;
+            LabAnnouncementFooter.Visibility = items.Count > shown.Count ? Visibility.Visible : Visibility.Collapsed;
+            LabAnnouncementFooter.Text = items.Count > shown.Count
+                ? Lang.Text("Launch.Announcement.More", items.Count - shown.Count)
+                : "";
+        }
+        catch (Exception ex)
+        {
+            ModBase.Log(ex, "[Page] 构建公告栏失败", ModBase.LogLevel.Debug);
+        }
+    }
+
+    /// <summary>构造一条公告的显示行。</summary>
+    private FrameworkElement BuildAnnouncementRow(AnnouncementItem item)
+    {
+        var accent = item.LevelEnum switch
+        {
+            AnnouncementLevel.Warning => Color.FromRgb(0xE0, 0x4B, 0x4B),
+            AnnouncementLevel.Important => Color.FromRgb(0xE8, 0x93, 0x1F),
+            _ => (Color)Application.Current.FindResource("ColorObject3")
+        };
+
+        var root = new Grid { Margin = new Thickness(0, 2, 0, 2), Cursor = Cursors.Hand };
+        root.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(4) });
+        root.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(9) });
+        root.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+        // 等级色条
+        var bar = new Border
+        {
+            Width = 3,
+            CornerRadius = new CornerRadius(1.5),
+            Background = new SolidColorBrush(accent),
+            VerticalAlignment = VerticalAlignment.Stretch,
+            Margin = new Thickness(0, 3, 0, 3)
+        };
+        Grid.SetColumn(bar, 0);
+        root.Children.Add(bar);
+
+        var stack = new StackPanel();
+        Grid.SetColumn(stack, 2);
+
+        var titleRow = new StackPanel { Orientation = Orientation.Horizontal };
+        var title = new TextBlock
+        {
+            Text = item.Title,
+            FontSize = 13.5,
+            FontWeight = item.IsNew ? FontWeights.Bold : FontWeights.Normal,
+            TextTrimming = TextTrimming.CharacterEllipsis,
+            TextWrapping = TextWrapping.Wrap,
+            MaxHeight = 40
+        };
+        title.SetResourceReference(TextBlock.ForegroundProperty, "ColorBrush1");
+        titleRow.Children.Add(title);
+
+        if (item.IsNew)
+        {
+            var dot = new Border
+            {
+                Width = 6,
+                Height = 6,
+                CornerRadius = new CornerRadius(3),
+                Background = new SolidColorBrush(accent),
+                Margin = new Thickness(6, 2, 0, 0),
+                VerticalAlignment = VerticalAlignment.Top
+            };
+            titleRow.Children.Add(dot);
+        }
+
+        if (item.Pinned)
+        {
+            var pin = new TextBlock
+            {
+                Text = Lang.Text("Launch.Announcement.Pinned"),
+                FontSize = 10,
+                Margin = new Thickness(6, 2, 0, 0),
+                VerticalAlignment = VerticalAlignment.Top
+            };
+            pin.SetResourceReference(TextBlock.ForegroundProperty, "ColorBrushGray3");
+            titleRow.Children.Add(pin);
+        }
+
+        stack.Children.Add(titleRow);
+
+        var sub = new TextBlock
+        {
+            Text = string.IsNullOrWhiteSpace(item.Time) ? "" : item.Time,
+            FontSize = 10.5,
+            Margin = new Thickness(0, 3, 0, 0)
+        };
+        sub.SetResourceReference(TextBlock.ForegroundProperty, "ColorBrushGray3");
+        stack.Children.Add(sub);
+
+        root.Children.Add(stack);
+        root.MouseLeftButtonUp += (_, e) =>
+        {
+            e.Handled = true;
+            ShowAnnouncementDetail(item);
+        };
+        return root;
+    }
+
+    /// <summary>显示公告详情。</summary>
+    private void ShowAnnouncementDetail(AnnouncementItem item)
+    {
+        try
+        {
+            AnnouncementBoard.MarkRead(item);
+            ModMain.MyMsgBoxMarkdown(string.IsNullOrWhiteSpace(item.Content) ? item.Title : item.Content,
+                string.IsNullOrWhiteSpace(item.Time) ? item.Title : $"{item.Title}（{item.Time}）");
+        }
+        catch (Exception ex)
+        {
+            ModBase.Log(ex, "[Page] 显示公告详情失败", ModBase.LogLevel.Debug);
+        }
+
+        RefreshAnnouncementUi();
+    }
+
+    private void BtnAnnouncementCollapse_Click(object sender, EventArgs e)
+    {
+        States.Hint.AnnouncementBoardCollapsed = true;
+        RefreshAnnouncementUi();
+    }
+
+    private void BtnAnnouncementExpand_Click(object sender, EventArgs e)
+    {
+        States.Hint.AnnouncementBoardCollapsed = false;
+        RefreshAnnouncementUi();
+    }
+
+    #endregion
+
 
     // 暂时关闭快照版提示
     private void BtnHintClose_Click(object sender, EventArgs e)

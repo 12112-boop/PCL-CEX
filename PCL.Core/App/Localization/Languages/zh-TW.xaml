@@ -1,4 +1,4 @@
-﻿<!-- Formatted by xaml-lang-formatter at 2026-06-28T17:16:52. -->
+<!-- Formatted by xaml-lang-formatter at 2026-06-28T17:16:52. -->
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -1475,6 +1475,12 @@
     <sys:String x:Key="Launch.Right.CommunityHint.Title">PCL-CEX 提示</sys:String>
     <sys:String x:Key="Launch.Right.CommunityHint.WrongInput">不太對哦……</sys:String>
     <sys:String x:Key="Launch.Right.Log.Title">啟動日誌</sys:String>
+    <sys:String x:Key="Launch.Announcement.Title">公告</sys:String>
+    <sys:String x:Key="Launch.Announcement.Empty">暫無公告</sys:String>
+    <sys:String x:Key="Launch.Announcement.Collapse">收合公告欄</sys:String>
+    <sys:String x:Key="Launch.Announcement.Expand">展開公告欄</sys:String>
+    <sys:String x:Key="Launch.Announcement.Pinned">置頂</sys:String>
+    <sys:String x:Key="Launch.Announcement.More">還有 {0} 條公告未顯示</sys:String>
 
     <!-- Launch.Account -->
 
