@@ -48,6 +48,7 @@ public partial class PageLaunchRight : IRefreshable
     #region 公告栏
 
     private bool _announcementSubscribed;
+    private bool _isAnnouncementRefreshing;
 
     /// <summary>
     ///     初始化右上角公告栏。必须在 UI 线程调用。
@@ -82,18 +83,18 @@ public partial class PageLaunchRight : IRefreshable
             if (items.Count == 0)
             {
                 PanAnnouncement.Visibility = Visibility.Collapsed;
-                BtnAnnouncementExpand.Visibility = Visibility.Collapsed;
+                PanAnnouncementCollapsed.Visibility = Visibility.Collapsed;
                 return;
             }
 
             if (collapsed)
             {
                 PanAnnouncement.Visibility = Visibility.Collapsed;
-                BtnAnnouncementExpand.Visibility = Visibility.Visible;
+                PanAnnouncementCollapsed.Visibility = Visibility.Visible;
                 return;
             }
 
-            BtnAnnouncementExpand.Visibility = Visibility.Collapsed;
+            PanAnnouncementCollapsed.Visibility = Visibility.Collapsed;
             PanAnnouncement.Visibility = Visibility.Visible;
 
             var shown = items.Take(4).ToList();
@@ -241,6 +242,46 @@ public partial class PageLaunchRight : IRefreshable
     {
         States.Hint.AnnouncementBoardCollapsed = false;
         RefreshAnnouncementUi();
+    }
+
+    /// <summary>手动刷新公告：重新从网络拉取，并给出旋转与提示反馈。</summary>
+    private void BtnAnnouncementRefresh_Click(object sender, EventArgs e)
+    {
+        if (_isAnnouncementRefreshing)
+            return;
+
+        _isAnnouncementRefreshing = true;
+        var icon = PanAnnouncement.Visibility == Visibility.Visible
+            ? BtnAnnouncementRefresh
+            : BtnAnnouncementRefreshCollapsed;
+        ModAnimation.AniStart(
+            new[]
+            {
+                ModAnimation.AaRotateTransform(icon, 360, 600,
+                    ease: new ModAnimation.AniEaseOutFluent()),
+                ModAnimation.AaCode(() =>
+                {
+                    icon.RenderTransform = null;
+                    _isAnnouncementRefreshing = false;
+                }, 600)
+            }, "Announcement Refresh Spin");
+
+        var before = AnnouncementBoard.LastLoadTime;
+        AnnouncementBoard.Refresh();
+        ModBase.RunInNewThread(() =>
+        {
+            var deadline = DateTime.Now.AddSeconds(20);
+            while (AnnouncementBoard.LastLoadTime == before && DateTime.Now < deadline)
+                Thread.Sleep(120);
+
+            ModBase.RunInUi(() =>
+            {
+                if (AnnouncementBoard.LastLoadSucceeded)
+                    HintService.Hint(Lang.Text("Launch.Announcement.Refreshed"), HintType.Success);
+                else
+                    HintService.Hint(Lang.Text("Launch.Announcement.RefreshFailed"), HintType.Error);
+            });
+        }, "刷新公告结果");
     }
 
     #endregion

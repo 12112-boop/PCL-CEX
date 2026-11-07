@@ -1480,6 +1480,9 @@
     <sys:String x:Key="Launch.Announcement.Collapse">收合公告欄</sys:String>
     <sys:String x:Key="Launch.Announcement.Expand">展開公告欄</sys:String>
     <sys:String x:Key="Launch.Announcement.Pinned">置頂</sys:String>
+    <sys:String x:Key="Launch.Announcement.Refresh">重新整理公告</sys:String>
+    <sys:String x:Key="Launch.Announcement.Refreshed">公告已重新整理</sys:String>
+    <sys:String x:Key="Launch.Announcement.RefreshFailed">重新整理公告失敗，請檢查網路連線</sys:String>
     <sys:String x:Key="Launch.Announcement.More">還有 {0} 條公告未顯示</sys:String>
 
     <!-- Launch.Account -->

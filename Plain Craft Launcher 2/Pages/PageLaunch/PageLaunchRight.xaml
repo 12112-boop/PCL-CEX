@@ -29,6 +29,12 @@
                       Width="340" Margin="0,18,18,0" Panel.ZIndex="20"
                       Title="{DynamicResource Launch.Announcement.Title}"
                       Visibility="Collapsed">
+            <local:MyIconButton x:Name="BtnAnnouncementRefresh"
+                                Width="20" Height="20" Margin="0,12,32,0" LogoScale="0.8"
+                                HorizontalAlignment="Right" VerticalAlignment="Top"
+                                SvgIcon="lucide/refresh-cw"
+                                ToolTip="{DynamicResource Launch.Announcement.Refresh}"
+                                Click="BtnAnnouncementRefresh_Click" />
             <local:MyIconButton x:Name="BtnAnnouncementCollapse"
                                 Width="20" Height="20" Margin="0,12,8,0" LogoScale="0.8"
                                 HorizontalAlignment="Right" VerticalAlignment="Top"
@@ -50,12 +56,20 @@
         </local:MyCard>
 
         <!-- 折叠后的入口 -->
-        <local:MyIconButton x:Name="BtnAnnouncementExpand"
-                            HorizontalAlignment="Right" VerticalAlignment="Top"
-                            Width="34" Height="34" Margin="0,18,18,0" Panel.ZIndex="20"
-                            SvgIcon="lucide/message-circle"
-                            ToolTip="{DynamicResource Launch.Announcement.Expand}"
-                            Click="BtnAnnouncementExpand_Click"
-                            Visibility="Collapsed" />
+        <StackPanel x:Name="PanAnnouncementCollapsed"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Orientation="Horizontal" Margin="0,18,18,0" Panel.ZIndex="20"
+                    Visibility="Collapsed">
+            <local:MyIconButton x:Name="BtnAnnouncementRefreshCollapsed"
+                                Width="34" Height="34" Margin="0,0,8,0"
+                                SvgIcon="lucide/refresh-cw"
+                                ToolTip="{DynamicResource Launch.Announcement.Refresh}"
+                                Click="BtnAnnouncementRefresh_Click" />
+            <local:MyIconButton x:Name="BtnAnnouncementExpand"
+                                Width="34" Height="34"
+                                SvgIcon="lucide/message-circle"
+                                ToolTip="{DynamicResource Launch.Announcement.Expand}"
+                                Click="BtnAnnouncementExpand_Click" />
+        </StackPanel>
     </Grid>
 </local:MyPageRight>

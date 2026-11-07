@@ -1524,6 +1524,9 @@
     <sys:String x:Key="Launch.Announcement.Collapse">Collapse announcements</sys:String>
     <sys:String x:Key="Launch.Announcement.Expand">Expand announcements</sys:String>
     <sys:String x:Key="Launch.Announcement.Pinned">Pinned</sys:String>
+    <sys:String x:Key="Launch.Announcement.Refresh">Refresh announcements</sys:String>
+    <sys:String x:Key="Launch.Announcement.Refreshed">Announcements refreshed</sys:String>
+    <sys:String x:Key="Launch.Announcement.RefreshFailed">Failed to refresh announcements. Check your network connection.</sys:String>
     <sys:String x:Key="Launch.Announcement.More">{0} more announcement(s) not shown</sys:String>
 
     <!-- Launch.Account -->

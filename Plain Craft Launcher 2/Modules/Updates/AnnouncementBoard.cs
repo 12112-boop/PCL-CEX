@@ -22,6 +22,7 @@ public static class AnnouncementBoard
     private const string CdnTemplate = "https://cdn.jsdelivr.net/gh/{0}@main/" + FilePath;
 
     private static readonly object Lock = new();
+    private static readonly object CacheLock = new();
     private static List<AnnouncementItem> _items = new();
     private static bool _loaded;
 
@@ -228,34 +229,45 @@ public static class AnnouncementBoard
 
     private static void SaveCache(string json)
     {
-        try
+        // 多个线程可能同时刷新，串行化写入并用「临时文件 + 替换」避免占用冲突
+        lock (CacheLock)
         {
-            File.WriteAllText(CacheFile, json);
-        }
-        catch (Exception ex)
-        {
-            ModBase.Log(ex, "[Announcement] 写入公告缓存失败", ModBase.LogLevel.Debug);
+            try
+            {
+                var tmp = CacheFile + ".tmp";
+                File.WriteAllText(tmp, json);
+                File.Move(tmp, CacheFile, true);
+            }
+            catch (Exception ex)
+            {
+                ModBase.Log(ex, "[Announcement] 写入公告缓存失败", ModBase.LogLevel.Debug);
+            }
         }
     }
 
     private static void LoadFromCache()
     {
-        try
+        lock (CacheLock)
         {
-            if (!File.Exists(CacheFile))
-                return;
-            var list = Parse(File.ReadAllText(CacheFile));
-            lock (Lock)
+            try
             {
-                _items = list;
-                _loaded = true;
-            }
+                if (!File.Exists(CacheFile))
+                    return;
+                using var stream = new FileStream(CacheFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                using var reader = new StreamReader(stream);
+                var list = Parse(reader.ReadToEnd());
+                lock (Lock)
+                {
+                    _items = list;
+                    _loaded = true;
+                }
 
-            Updated?.Invoke();
-        }
-        catch (Exception ex)
-        {
-            ModBase.Log(ex, "[Announcement] 读取公告缓存失败", ModBase.LogLevel.Debug);
+                Updated?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                ModBase.Log(ex, "[Announcement] 读取公告缓存失败", ModBase.LogLevel.Debug);
+            }
         }
     }
 

@@ -1524,6 +1524,9 @@
     <sys:String x:Key="Launch.Announcement.Collapse">收起公告栏</sys:String>
     <sys:String x:Key="Launch.Announcement.Expand">展开公告栏</sys:String>
     <sys:String x:Key="Launch.Announcement.Pinned">置顶</sys:String>
+    <sys:String x:Key="Launch.Announcement.Refresh">刷新公告</sys:String>
+    <sys:String x:Key="Launch.Announcement.Refreshed">公告已刷新</sys:String>
+    <sys:String x:Key="Launch.Announcement.RefreshFailed">刷新公告失败，请检查网络连接</sys:String>
     <sys:String x:Key="Launch.Announcement.More">还有 {0} 条公告未显示</sys:String>
 
     <!-- Launch.Account -->
