@@ -753,12 +753,6 @@ public partial class PageSetupUI
         }
     }
 
-    // 赞助
-    private void BtnLauncherDonate_Click(object sender, MouseButtonEventArgs e)
-    {
-        ModBase.OpenWebsite("https://afdian.com/a/LTCat");
-    }
-
     // 滑动条
     private void SliderLoad()
     {

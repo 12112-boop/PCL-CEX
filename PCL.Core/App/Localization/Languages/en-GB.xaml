@@ -3057,7 +3057,6 @@
 
     <sys:String x:Key="Setup.Ui.Basic.AdvancedMaterial">Advanced material</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.AdvancedMaterial.ToolTip">When enabled, blur effects will be applied to some transparent areas, such as cards.&#xA;Note that this feature consumes significant GPU resources and may cause lag!</sys:String>
-    <sys:String x:Key="Setup.Ui.Basic.BlueHint">Blue, blue, and more blue! Want to escape from the blue dilemma? Use the official snapshot build!</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.BlurMethod">Blur method</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.BlurMethod.Box">Box blur</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.BlurMethod.Box.ToolTip">Uses linear average sampling over a small area around each pixel, which is faster but may produce colour blocks.&#xA;This blur may lose detail information but has better performance. It can be used on devices with poor performance.</sys:String>
@@ -3068,7 +3067,6 @@
     <sys:String x:Key="Setup.Ui.Basic.BlurRadius.ToolTip">Sets the sampling radius of the blur effect. Larger values produce stronger blur.</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.BlurSamplingRate">Sampling rate</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.BlurSamplingRate.ToolTip">Sets the sampling rate of the blur effect. Higher values produce finer blur.&#xA;If your device has poor performance, try lowering this value for better performance.</sys:String>
-    <sys:String x:Key="Setup.Ui.Basic.GetSnapshot">Get official snapshot build</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.LockWindow">Lock launcher size</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.Opacity">Opacity</sys:String>
     <sys:String x:Key="Setup.Ui.Basic.Opacity2">Opacity</sys:String>
