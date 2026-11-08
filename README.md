@@ -26,13 +26,11 @@
 
 </div>
 
-PCL CE 是基于 PCL 开源代码二次开发的社区版本，包括了主线暂未制作的功能和改进！
+PCL CEX 是基于 PCL 开源代码二次开发的社区版本，包括了主线暂未制作的功能和改进！
 
 社区版的版本号与主线并非严格对应关系，也请不要向官方仓库反馈社区版问题。
 
 欢迎大家来用用看！
-
-**开发群:** [599620549](https://qm.qq.com/q/PNQA4Md8wc)[✦](https://t.me/+78XW2bUOvKJjMTZl) | **用户 1 群:** [1028074835](https://qm.qq.com/q/qrMGJo8BQQ) | **用户 2 群:** [1070029541](https://qm.qq.com/q/lBywbDMWhG)
 
 ## 💻 支持平台
 
@@ -56,18 +54,3 @@ PCL CE 是基于 PCL 开源代码二次开发的社区版本，包括了主线�
 取决于部分问题的特殊性（如系统不完整），有时你仍然必须升级操作系统以继续获得支持。    
 PCL CE 始终建议使用最新版本的操作系统以获得最佳体验。    
 你仍然可以尝试在不受支持的系统上使用 PCL CE，但可能会遇到很多额外问题。
-
-## 🔒 许可证
-
-- `Plain Craft Launcher 2/` 使用 [自定义许可证](https://github.com/PCL-Community/PCL-CE/blob/dev/Plain%20Craft%20Launcher%202/LICENCE)
-- `其余所有目录` 使用 [Apache License 2.0](https://github.com/PCL-Community/PCL-CE/blob/dev/LICENSE)
-
-## 🌟 统计数据
-![Alt](https://repobeats.axiom.co/api/embed/3e46296e6e3a134991a783480fd2f62723bb0353.svg "Repobeats analytics image")
-
-[![Star History Chart](https://api.star-history.com/chart?repos=PCL-Community/PCL-CE&type=date&legend=top-left&sealed_token=Ts-GaAXJ5nb9fJERusrXneo05pfZ83tMhReHJ98nmmlemBTqHS5Ozocdep1MTMdsX-6CRiQH9TqiS1Kk7SxjTfk02eUOxnm25oHff6TLLvrY7pGujOkU1IwjVFQLE-5GJYogutJAyI78jujBlOnpk3J2OKAY1PBhmkyUOzW1C1sdz5BzPbj2eBbJGvDx)](https://www.star-history.com/?repos=PCL-Community%2FPCL-CE&type=date&legend=top-left)
-
-**此页浏览量**（总计 / 今日）：[![Hits](https://hits.zkitefly.eu.org/?tag=https://github.com/PCL-Community/PCL-CE)](https://hits.zkitefly.eu.org/?tag=https://github.com/PCL-Community/PCL-CE&web=true)
-## ❤️ 贡献者
-
-[![](https://contrib.rocks/image?repo=PCL-Community/PCL-CE)](https://github.com/PCL-Community/PCL-CE/graphs/contributors)
