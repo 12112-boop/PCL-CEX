@@ -127,6 +127,11 @@ public static partial class States
         /// 数据包更新警告。
         /// </summary>
         [ConfigItem<bool>("HintDatapackUpdate",false)] public partial bool FunctionDatapackUpdate { get; set; }
+
+        /// <summary>
+        /// 已阅读的公告。
+        /// </summary>
+        [ConfigItem<string>("ReadAnnouncements", "")] public partial string ReadAnnouncements { get; set; }
     }
 
     /// <summary>

@@ -162,6 +162,11 @@ public static partial class Config
         /// Mirror 酱 CDK。
         /// </summary>
         [ConfigItem<string>("SystemMirrorChyanKey", "", ConfigSource.SharedEncrypt)] public partial string MirrorChyanKey { get; set; }
+
+        /// <summary>
+        /// GitHub 仓库（owner/repo），用于 PCL-CEX 自有更新源。
+        /// </summary>
+        [ConfigItem<string>("UpdateRepository", "", ConfigSource.Local)] public partial string Repository { get; set; }
     }
 
     /// <summary>

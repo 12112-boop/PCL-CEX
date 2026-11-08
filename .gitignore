@@ -346,3 +346,4 @@ MaskFiles/
 # macOS
 
 **/.DS_Storebuild/
+build/
