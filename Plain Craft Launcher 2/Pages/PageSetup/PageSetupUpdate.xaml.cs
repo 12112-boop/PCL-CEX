@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using PCL.Core.App;
@@ -21,10 +21,9 @@ public partial class PageSetupUpdate
     private void Init()
     {
         ModAnimation.AniControlEnabled += 1;
-        TextUpdateRepository.Text = string.IsNullOrWhiteSpace(Config.Update.Repository)
-            ? UpdatesGitHubReleaseModel.DefaultRepository
-            : Config.Update.Repository;
+        TextMirrorCDK.Password = Config.Update.MirrorChyanKey;
 
+        ComboSystemUpdateChannel.SelectedIndex = (int)Config.Update.UpdateChannel;
         ComboSystemUpdateMode.SelectedIndex = (int)Config.Update.UpdateMode;
 
         TextCurrentVersion.Text = "PCL-CEX " + VersionNameFormat(ModBase.versionBaseName);
@@ -39,7 +38,7 @@ public partial class PageSetupUpdate
             // 修复：使用 dynamic 绕过命名空间重名导致的编译期类型冲突，
             // 或者你可以尝试替换为 PCL.Core.App.SemVer.Parse(ModBase.versionBaseName)
             if (await UpdateManager.remoteServer.IsLatestAsync(
-                    UpdateChannel.stable,
+                    UpdateManager.IsCurrentVersionBeta ? UpdateChannel.beta : UpdateChannel.stable,
                     SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64,
                     SemVer.Parse(ModBase.versionBaseName),
                     ModBase.versionCode))
@@ -77,23 +76,15 @@ public partial class PageSetupUpdate
                 try
                 {
                     updateInfo = UpdateManager.remoteServer.GetLatestVersion(
-                        UpdateChannel.stable,
-                        SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64);
+                        UpdateManager.IsCurrentVersionBeta
+                            ? UpdateChannel.beta
+                            : UpdateChannel.stable, SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64);
                     TextUpdateName.Text = "PCL-CEX " + VersionNameFormat(updateInfo.VersionName);
-                    // GitHub Release 的正文通常没有 <summary> 标签，这时取正文前几行做预览
-                    var changelog = updateInfo.Changelog ?? "";
-                    var summary = changelog.Between("<summary>", "</summary>");
-                    if (changelog.Contains("<summary>") && !string.IsNullOrWhiteSpace(summary))
-                    {
-                        TextChangelog.Text = summary.Trim();
-                    }
+                    var summary = updateInfo.Changelog.Between("<summary>", "</summary>");
+                    if (!updateInfo.Changelog.Contains("<summary>") || string.IsNullOrWhiteSpace(summary.Trim()))
+                        TextChangelog.Text = Lang.Text("Setup.Update.Changelog.Empty");
                     else
-                    {
-                        var preview = BuildChangelogPreview(changelog);
-                        TextChangelog.Text = string.IsNullOrWhiteSpace(preview)
-                            ? Lang.Text("Setup.Update.Changelog.Empty")
-                            : preview;
-                    }
+                        TextChangelog.Text = summary;
                 }
                 catch (Exception ex)
                 {
@@ -181,46 +172,91 @@ public partial class PageSetupUpdate
             ModMain.MyMsgBoxMarkdown(updateInfo.Changelog, Lang.Text("Setup.Update.Changelog.Title"));
     }
 
-    private void TextUpdateRepository_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        if (ModAnimation.AniControlEnabled != 0)
-            return;
-
-        var text = (TextUpdateRepository.Text ?? "").Trim();
-        // 留空表示使用内置默认仓库
-        Config.Update.Repository = text == UpdatesGitHubReleaseModel.DefaultRepository ? "" : text;
-        UpdateManager.ReloadSource();
-    }
-
     private void ComboSystemUpdateMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (ModAnimation.AniControlEnabled == 0)
             Config.Update.UpdateMode = (LauncherAutoUpdateBehavior)ComboSystemUpdateMode.SelectedIndex;
     }
 
-    private void BtnChangelog_Click(object sender, MouseButtonEventArgs e)
+    private void ComboSystemUpdateBranch_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var repo = UpdateManager.gitHubSource.Repository;
-        var tag = updateInfo is null ? ModBase.versionBaseName : updateInfo.VersionName;
-        ModBase.OpenWebsite($"https://github.com/{repo}/releases/tag/v{tag}");
+        if (ModAnimation.AniControlEnabled != 0)
+            return;
+
+        var isCancelled = false;
+        switch (ComboSystemUpdateChannel.SelectedIndex)
+        {
+            case 0:
+            {
+                break;
+            }
+            case 1:
+            {
+                if (ModMain.MyMsgBox(Lang.Text("Setup.Update.Channel.Beta.Warning.Message"),
+                        Lang.Text("Setup.Update.Channel.Common.Warning.Title"),
+                        Lang.Text("Setup.Update.Channel.Common.Warning.Confirm"),
+                        Lang.Text("Common.Action.Cancel"), isWarn: true) == 2)
+                    isCancelled = true;
+                else
+                    CheckUpdate();
+                break;
+            }
+            case 2:
+            {
+                if (ModMain.MyMsgBox(Lang.Text("Setup.Update.Channel.Dev.Warning.Message"),
+                        Lang.Text("Setup.Update.Channel.Common.Warning.Title"),
+                        Lang.Text("Setup.Update.Channel.Common.Warning.Confirm"),
+                        Lang.Text("Common.Action.Cancel"), isWarn: true) == 2)
+                {
+                    isCancelled = true;
+                    break;
+                }
+
+                var confirmText = Lang.Text("Setup.Update.Channel.Dev.FinalConfirm.ExpectedInput");
+                var ret = ModMain.MyMsgBoxInput(
+                    Lang.Text("Setup.Update.Channel.Dev.FinalConfirm.Title"),
+                    Lang.Text("Setup.Update.Channel.Dev.FinalConfirm.Message", confirmText),
+                    button1: Lang.Text("Setup.Update.Channel.Dev.FinalConfirm.Submit"),
+                    button2: Lang.Text("Common.Action.Cancel"), isWarn: true);
+    
+                if (ret == confirmText)
+                {
+                    CheckUpdate();
+                }
+                else
+                {
+                    HintService.Hint(Lang.Text("Setup.Update.Channel.Dev.FinalConfirm.WrongInput"));
+                    isCancelled = true;
+                }
+                break;
+            }
+        }
+
+        if (isCancelled)
+        {
+            ModAnimation.AniControlEnabled += 1;
+            ComboSystemUpdateChannel.SelectedItem = e.RemovedItems[0];
+            ModAnimation.AniControlEnabled -= 1;
+        }
+        else
+        {
+            Config.Update.UpdateChannel = (Core.App.UpdateChannel)ComboSystemUpdateChannel.SelectedIndex;
+        }
     }
 
-    /// <summary>把 Markdown 更新日志压成卡片上的三两行预览。</summary>
-    private static string BuildChangelogPreview(string changelog)
+    private void TextMirrorCDK_PasswordChanged(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(changelog))
-            return "";
-        var lines = changelog.Replace("\r", "").Split('\n')
-            .Select(line => line.Trim())
-            .Where(line => line.Length > 0)
-            .Where(line => !line.StartsWith("#") && !line.StartsWith("|") &&
-                           !line.StartsWith("---") && !line.StartsWith("```"))
-            .Select(line => line.StartsWith("- ") || line.StartsWith("* ") ? line[2..].Trim() : line)
-            .Where(line => line.Length > 0)
-            .Take(3)
-            .ToList();
-        var text = string.Join("\n", lines);
-        return text.Length > 160 ? text[..160] + "……" : text;
+        Config.Update.MirrorChyanKey = TextMirrorCDK.Password;
+    }
+
+    private void BtnGetMirrorCDK_Click(object sender, MouseButtonEventArgs e)
+    {
+        ModBase.OpenWebsite("https://mirrorchyan.com/");
+    }
+
+    private void BtnChangelog_Click(object sender, MouseButtonEventArgs e)
+    {
+        ModBase.OpenWebsite("https://github.com/PCL-Community/PCL2-CE/releases/v" + ModBase.versionBaseName);
     }
 
     public string VersionNameFormat(string str)

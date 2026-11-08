@@ -65,6 +65,10 @@ Si ces problèmes ne sont pas résolus, certaines fonctions risquent de ne pas f
     <sys:String x:Key="Common.Action.OpenFolder">Ouvrir le dossier</sys:String>
     <sys:String x:Key="Common.Action.Overwrite">Remplacer</sys:String>
     <sys:String x:Key="Common.Action.Refresh">Actualiser</sys:String>
+    <sys:String x:Key="Common.Action.Forward">Suivant</sys:String>
+    <sys:String x:Key="Skin.Library.OpenBrowser">Ouvrir dans le navigateur</sys:String>
+    <sys:String x:Key="Skin.Library.OpenHint">Le navigateur intégré utilise un moteur obsolète que LittleSkin peut rejeter. Cliquez sur « Ouvrir dans le navigateur » pour parcourir la bibliothèque et télécharger les skins avec votre navigateur par défaut, puis importez-les et appliquez-les dans « Mes skins ».</sys:String>
+    <sys:String x:Key="Skin.Library.WebViewError">Échec de l'initialisation de WebView2 : {0}. Ouvrez LittleSkin dans votre navigateur par défaut.</sys:String>
     <sys:String x:Key="Common.Action.Reset">Réinitialiser</sys:String>
     <sys:String x:Key="Common.Action.Search">Rechercher</sys:String>
     <sys:String x:Key="Common.Action.UpdateLog">Journal des modifications</sys:String>

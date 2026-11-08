@@ -78,6 +78,10 @@
     <sys:String x:Key="Common.Action.OpenFolder">打开文件夹</sys:String>
     <sys:String x:Key="Common.Action.Overwrite">覆盖</sys:String>
     <sys:String x:Key="Common.Action.Refresh">刷新</sys:String>
+    <sys:String x:Key="Common.Action.Forward">前进</sys:String>
+    <sys:String x:Key="Skin.Library.OpenBrowser">用浏览器打开</sys:String>
+    <sys:String x:Key="Skin.Library.OpenHint">内置浏览器内核较旧，小皮肤站可能拒绝服务。请点击"用浏览器打开"，使用系统默认浏览器（Chrome/Edge/Firefox）浏览皮肤库并下载皮肤，完成后在「我的皮肤」中导入并应用。</sys:String>
+    <sys:String x:Key="Skin.Library.WebViewError">WebView2 初始化失败：{0}。请用默认浏览器打开小皮肤。</sys:String>
     <sys:String x:Key="Common.Action.Reset">重置</sys:String>
     <sys:String x:Key="Common.Action.Search">搜索</sys:String>
     <sys:String x:Key="Common.Action.UpdateLog">更新日志</sys:String>
@@ -1519,15 +1523,6 @@
     <sys:String x:Key="Launch.Right.CommunityHint.Title">PCL-CEX 提示</sys:String>
     <sys:String x:Key="Launch.Right.CommunityHint.WrongInput">不太对哦……</sys:String>
     <sys:String x:Key="Launch.Right.Log.Title">启动日志</sys:String>
-    <sys:String x:Key="Launch.Announcement.Title">公告</sys:String>
-    <sys:String x:Key="Launch.Announcement.Empty">暂无公告</sys:String>
-    <sys:String x:Key="Launch.Announcement.Collapse">收起公告栏</sys:String>
-    <sys:String x:Key="Launch.Announcement.Expand">展开公告栏</sys:String>
-    <sys:String x:Key="Launch.Announcement.Pinned">置顶</sys:String>
-    <sys:String x:Key="Launch.Announcement.Refresh">刷新公告</sys:String>
-    <sys:String x:Key="Launch.Announcement.Refreshed">公告已刷新</sys:String>
-    <sys:String x:Key="Launch.Announcement.RefreshFailed">刷新公告失败，请检查网络连接</sys:String>
-    <sys:String x:Key="Launch.Announcement.More">还有 {0} 条公告未显示</sys:String>
 
     <!-- Launch.Account -->
 
@@ -1662,7 +1657,9 @@
     <sys:String x:Key="Launch.Account.ProfileSkin.PasswordUnsupported">当前档案不支持修改密码！</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.RefreshSkin">刷新头像</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.SaveSkin">保存皮肤</sys:String>
+    <sys:String x:Key="Launch.Account.ProfileSkin.FromLibrary">从皮肤库选择</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.SkinUnsupported">当前档案不支持修改皮肤！</sys:String>
+    <sys:String x:Key="Launch.Account.ProfileSkin.LibraryEmpty">皮肤库为空，请先去「皮肤」标签页下载喜欢的皮肤</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.SkinsAndCapes">皮肤与披风</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.SwitchProfile">选择档案</sys:String>
 
@@ -1926,6 +1923,39 @@
     <sys:String x:Key="Main.Tab.Launch">启动</sys:String>
     <sys:String x:Key="Main.Tab.Settings">设置</sys:String>
     <sys:String x:Key="Main.Tab.Tools">工具</sys:String>
+    <sys:String x:Key="Main.Tab.Skin">皮肤</sys:String>
+    <sys:String x:Key="Main.Tab.SkinLibrary">皮肤库</sys:String>
+    <sys:String x:Key="Main.Tab.SkinMine">我的皮肤</sys:String>
+    <sys:String x:Key="Skin.Left.Library">小皮肤库</sys:String>
+    <sys:String x:Key="Skin.Left.LibraryInfo">浏览并下载小皮肤</sys:String>
+    <sys:String x:Key="Skin.Left.Mine">本地</sys:String>
+    <sys:String x:Key="Skin.Library.Title">小皮肤库</sys:String>
+    <sys:String x:Key="Skin.Library.Description">来自 littleskin.cn 的热门皮肤，点击"下载"按钮获取并应用。</sys:String>
+    <sys:String x:Key="Skin.Library.Empty">暂无皮肤</sys:String>
+    <sys:String x:Key="Skin.Library.FetchError">获取皮肤列表失败，请检查网络。</sys:String>
+    <sys:String x:Key="Skin.Library.Download">下载</sys:String>
+    <sys:String x:Key="Skin.Library.DownloadSuccess">皮肤「{0}」已下载，准备应用。</sys:String>
+    <sys:String x:Key="Skin.Library.DownloadError">下载皮肤失败：{0}</sys:String>
+    <sys:String x:Key="Skin.Mine.Title">我的皮肤</sys:String>
+    <sys:String x:Key="Skin.Mine.Description">本地已保存的皮肤文件，可一键应用或删除。</sys:String>
+    <sys:String x:Key="Skin.Mine.Empty">还没有保存的皮肤，可导入本地皮肤文件。</sys:String>
+    <sys:String x:Key="Skin.Mine.Apply">应用</sys:String>
+    <sys:String x:Key="Skin.Mine.Delete">删除</sys:String>
+    <sys:String x:Key="Skin.Mine.DeleteConfirm">确认删除「{0}」？</sys:String>
+    <sys:String x:Key="Skin.Mine.DeleteSuccess">已删除「{0}」。</sys:String>
+    <sys:String x:Key="Skin.Mine.Import">导入</sys:String>
+    <sys:String x:Key="Skin.Mine.Import.Filter">皮肤文件(*.png)|*.png</sys:String>
+    <sys:String x:Key="Skin.Mine.Import.Title">选择皮肤文件</sys:String>
+    <sys:String x:Key="Skin.Mine.ImportSuccess">已导入「{0}」。</sys:String>
+    <sys:String x:Key="Skin.Mine.ImportError">导入失败：{0}</sys:String>
+    <sys:String x:Key="Skin.Mine.OpenFolder">打开目录</sys:String>
+    <sys:String x:Key="Skin.Mine.ApplyError">应用失败：{0}</sys:String>
+    <sys:String x:Key="Skin.Error.FileMissing">皮肤文件不存在</sys:String>
+    <sys:String x:Key="Skin.Error.FileTooLarge">皮肤文件过大（{0} KB）</sys:String>
+    <sys:String x:Key="Skin.Error.InvalidSize">皮肤尺寸无效</sys:String>
+    <sys:String x:Key="Skin.Error.NoProfile">未选择账号</sys:String>
+    <sys:String x:Key="Skin.Apply.OfflineSuccess">皮肤已保存到本地，离线模式下次启动生效。</sys:String>
+    <sys:String x:Key="Skin.Apply.ThirdPartySuccess">皮肤已保存到本地，第三方账号下次启动生效。</sys:String>
     <sys:String x:Key="Main.Telemetry.Message">启用遥测数据收集后，启动器将会收集并上报错误与设备环境信息，这可以帮助开发者修复潜在的问题、更好的进行规划和开发。&#xA;若启用此功能，我们将会收集以下信息：&#xA;&#xA;- 启动器内出现的错误&#xA;- 启动器版本信息与识别码&#xA;- Windows 系统版本与架构&#xA;- 已安装的物理内存大小&#xA;- NAT 与 IPv6 支持情况&#xA;- 是否使用过原版 PCL、HMCL 或 BakaXL&#xA;&#xA;这些数据均不与你关联，我们也绝不会向第三方出售数据。&#xA;如果不希望启用遥测，可以选择拒绝。这不会影响其他功能的正常使用，但可能会影响开发者修复潜在 Bug。&#xA;你可以随时在启动器设置中调整这项设置。</sys:String>
     <sys:String x:Key="Main.Telemetry.Title">启用遥测数据收集</sys:String>
     <sys:String x:Key="Main.Title.GameLog">实时日志</sys:String>
@@ -3310,8 +3340,6 @@
     <sys:String x:Key="Setup.Update.Channel.Common.Warning.Title">继续之前...</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Release">正式版 / Release</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Release.ToolTip">较为稳定的版本，仅推送修复性更新与部分内置资源更新，适合大多数用户使用。</sys:String>
-    <sys:String x:Key="Setup.Update.Repository.Title">更新源仓库</sys:String>
-    <sys:String x:Key="Setup.Update.Repository.ToolTip">填写 GitHub 仓库，格式为 owner/repo（例如 12112-boop/PCL-CEX）。&#xA;留空则使用内置默认仓库。启动器会读取该仓库的 Latest Release：tag 作为版本号，上传的 exe 作为更新文件，Release 说明作为更新日志。</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Title">更新通道</sys:String>
 
     <!-- Setup.Update.Channel.Dev -->
@@ -3701,7 +3729,7 @@
     <sys:String x:Key="Update.Action">更新</sys:String>
     <sys:String x:Key="Update.Available">启动器有新版本可用（{0} -&gt; {1}）&#xA;是否立即更新？</sys:String>
     <sys:String x:Key="Update.Check.Failed">无法获取最新版本信息，请检查网络连接</sys:String>
-    <sys:String x:Key="Update.CommunityNotice.Body">你正在使用 PCL-CEX，这是一个基于 PCL-CE 的个人修改版本。&#xA;遇到问题请向 PCL-CEX 自己的仓库反馈，不要向 PCL-CE 或原版 PCL 的仓库反馈。&#xA;本版本与 PCL-Community 及龙腾猫跃均无从属关系，且不提供任何担保。&#xA;&#xA;该版本相对原版新增：&#xA;- Mod 前置修复：一键扫描并补全缺失的硬性前置依赖。&#xA;- AI 聊天：支持任意 OpenAI 兼容接口，也可连接本地 Ollama / LM Studio。&#xA;- 多窗口：直接双击 exe 即可开新窗口，新窗口自动分配不同主题色。&#xA;- 正版登录修复：本地编译版本可直接使用微软登录。&#xA;&#xA;此提示会在启动器更新后展示一次。</sys:String>
+    <sys:String x:Key="Update.CommunityNotice.Body">你正在使用来自 PCL-Community 的 PCL-CEX，遇到问题请不要向原版仓库反馈！&#xA;PCL-Community 及其成员与龙腾猫跃无从属关系，且均不会为您的使用做担保。&#xA;&#xA;如果你是意外下载的 PCL-CEX，建议下载原版 PCL 使用。&#xA;如果你是意外下载的 PCL-CEX，建议下载原版 PCL 使用。&#xA;如果你是意外下载的 PCL-CEX，建议下载原版 PCL 使用。&#xA;&#xA;该版本与原版的特性区别：&#xA;- 主题切换：仅部分固定蓝色系主题，没有计划新增其它主题。&#xA;- 百宝箱：缺失部分原版中的内容（回声洞、千万别点）。&#xA;&#xA;此提示会在启动器更新后展示一次。</sys:String>
     <sys:String x:Key="Update.CommunityNotice.Confirm">我知道了</sys:String>
     <sys:String x:Key="Update.CommunityNotice.Title">PCL-CEX 版本说明</sys:String>
     <sys:String x:Key="Update.Error.FetchFailed">获取启动器更新失败，请检查网络连接</sys:String>

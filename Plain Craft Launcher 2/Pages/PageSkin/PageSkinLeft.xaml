@@ -1,0 +1,52 @@
+<local:MyPageLeft x:Class="PCL.PageSkinLeft"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:PCL"
+                   mc:Ignorable="d">
+    <StackPanel Orientation="Vertical" x:Name="PanItem" Margin="0,12,0,0">
+
+        <TextBlock Text="{DynamicResource Skin.Left.Library}"
+                   Margin="13,5,5,3"
+                   Opacity="0.6" FontSize="12"
+                   x:Name="TextLibraryCategory" />
+
+        <local:MyListItem x:Name="ItemLibrary"
+                          IsScaleAnimationEnabled="False"
+                          Type="RadioBox" Tag="0"
+                          Check="PageCheck"
+                          MinPaddingRight="35" Height="36"
+                          VerticalAlignment="Top"
+                          Title="{DynamicResource Main.Tab.SkinLibrary}"
+                          Info="{DynamicResource Skin.Left.LibraryInfo}"
+                          LogoScale="0.85"
+                          SvgIcon="lucide/library-big">
+            <local:MyListItem.Buttons>
+                <x:Array Type="{x:Type local:MyIconButton}">
+                    <local:MyIconButton Tag="0"
+                                        ToolTip="{DynamicResource Common.Action.Refresh}"
+                                        ToolTipService.Placement="Right"
+                                        ToolTipService.InitialShowDelay="200"
+                                        ToolTipService.VerticalOffset="-1"
+                                        LogoScale="0.85"
+                                        Click="Refresh"
+                                        SvgIcon="lucide/refresh-cw" />
+                </x:Array>
+            </local:MyListItem.Buttons>
+        </local:MyListItem>
+
+        <TextBlock Text="{DynamicResource Skin.Left.Mine}" Margin="13,5,5,3" Opacity="0.6" FontSize="12"
+                   x:Name="TextMineCategory" />
+        <local:MyListItem x:Name="ItemMine"
+                          IsScaleAnimationEnabled="False"
+                          Type="RadioBox" Tag="1"
+                          MinPaddingRight="35" Height="36"
+                          VerticalAlignment="Top"
+                          Title="{DynamicResource Main.Tab.SkinMine}"
+                          Check="PageCheck"
+                          LogoScale="0.9"
+                          SvgIcon="lucide/shirt" />
+
+    </StackPanel>
+</local:MyPageLeft>

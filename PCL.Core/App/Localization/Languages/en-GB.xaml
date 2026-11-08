@@ -78,6 +78,10 @@
     <sys:String x:Key="Common.Action.OpenFolder">Open folder</sys:String>
     <sys:String x:Key="Common.Action.Overwrite">Override</sys:String>
     <sys:String x:Key="Common.Action.Refresh">Refresh</sys:String>
+    <sys:String x:Key="Common.Action.Forward">Forward</sys:String>
+    <sys:String x:Key="Skin.Library.OpenBrowser">Open in Browser</sys:String>
+    <sys:String x:Key="Skin.Library.OpenHint">The embedded browser uses an older engine that LittleSkin may reject. Click "Open in Browser" to browse the skin library and download skins with your default browser (Chrome/Edge/Firefox), then import and apply them in "My Skins".</sys:String>
+    <sys:String x:Key="Skin.Library.WebViewError">WebView2 initialisation failed: {0}. Please open LittleSkin in your default browser instead.</sys:String>
     <sys:String x:Key="Common.Action.Reset">Reset</sys:String>
     <sys:String x:Key="Common.Action.Search">Search</sys:String>
     <sys:String x:Key="Common.Action.UpdateLog">Changelog</sys:String>
@@ -1475,15 +1479,6 @@
     <sys:String x:Key="Launch.Right.CommunityHint.Title">PCL-CEX notice</sys:String>
     <sys:String x:Key="Launch.Right.CommunityHint.WrongInput">Not quite right...</sys:String>
     <sys:String x:Key="Launch.Right.Log.Title">Launch log</sys:String>
-    <sys:String x:Key="Launch.Announcement.Title">Announcements</sys:String>
-    <sys:String x:Key="Launch.Announcement.Empty">No announcements</sys:String>
-    <sys:String x:Key="Launch.Announcement.Collapse">Collapse announcements</sys:String>
-    <sys:String x:Key="Launch.Announcement.Expand">Expand announcements</sys:String>
-    <sys:String x:Key="Launch.Announcement.Pinned">Pinned</sys:String>
-    <sys:String x:Key="Launch.Announcement.Refresh">Refresh announcements</sys:String>
-    <sys:String x:Key="Launch.Announcement.Refreshed">Announcements refreshed</sys:String>
-    <sys:String x:Key="Launch.Announcement.RefreshFailed">Failed to refresh announcements. Check your network connection.</sys:String>
-    <sys:String x:Key="Launch.Announcement.More">{0} more announcement(s) not shown</sys:String>
 
     <!-- Launch.Account -->
 
@@ -1879,6 +1874,39 @@
     <sys:String x:Key="Main.Tab.Launch">Launch</sys:String>
     <sys:String x:Key="Main.Tab.Settings">Settings</sys:String>
     <sys:String x:Key="Main.Tab.Tools">Tools</sys:String>
+    <sys:String x:Key="Main.Tab.Skin">Skin</sys:String>
+    <sys:String x:Key="Main.Tab.SkinLibrary">Skin Library</sys:String>
+    <sys:String x:Key="Main.Tab.SkinMine">My Skins</sys:String>
+    <sys:String x:Key="Skin.Left.Library">LittleSkin Library</sys:String>
+    <sys:String x:Key="Skin.Left.LibraryInfo">Browse &amp; download skins</sys:String>
+    <sys:String x:Key="Skin.Left.Mine">Local</sys:String>
+    <sys:String x:Key="Skin.Library.Title">LittleSkin Library</sys:String>
+    <sys:String x:Key="Skin.Library.Description">Trending skins from littleskin.cn. Click “Download” to fetch and apply.</sys:String>
+    <sys:String x:Key="Skin.Library.Empty">No skins yet</sys:String>
+    <sys:String x:Key="Skin.Library.FetchError">Failed to fetch skin list. Check your network.</sys:String>
+    <sys:String x:Key="Skin.Library.Download">Download</sys:String>
+    <sys:String x:Key="Skin.Library.DownloadSuccess">Skin “{0}” downloaded, applying.</sys:String>
+    <sys:String x:Key="Skin.Library.DownloadError">Download failed: {0}</sys:String>
+    <sys:String x:Key="Skin.Mine.Title">My Skins</sys:String>
+    <sys:String x:Key="Skin.Mine.Description">Skins saved locally. Apply or delete with one click.</sys:String>
+    <sys:String x:Key="Skin.Mine.Empty">No saved skins yet. Import a local skin file.</sys:String>
+    <sys:String x:Key="Skin.Mine.Apply">Apply</sys:String>
+    <sys:String x:Key="Skin.Mine.Delete">Delete</sys:String>
+    <sys:String x:Key="Skin.Mine.DeleteConfirm">Delete “{0}”?</sys:String>
+    <sys:String x:Key="Skin.Mine.DeleteSuccess">“{0}” deleted.</sys:String>
+    <sys:String x:Key="Skin.Mine.Import">Import</sys:String>
+    <sys:String x:Key="Skin.Mine.Import.Filter">Skin file (*.png)|*.png</sys:String>
+    <sys:String x:Key="Skin.Mine.Import.Title">Select skin file</sys:String>
+    <sys:String x:Key="Skin.Mine.ImportSuccess">Imported “{0}”.</sys:String>
+    <sys:String x:Key="Skin.Mine.ImportError">Import failed: {0}</sys:String>
+    <sys:String x:Key="Skin.Mine.OpenFolder">Open Folder</sys:String>
+    <sys:String x:Key="Skin.Mine.ApplyError">Apply failed: {0}</sys:String>
+    <sys:String x:Key="Skin.Error.FileMissing">Skin file not found</sys:String>
+    <sys:String x:Key="Skin.Error.FileTooLarge">Skin file too large ({0} KB)</sys:String>
+    <sys:String x:Key="Skin.Error.InvalidSize">Invalid skin size</sys:String>
+    <sys:String x:Key="Skin.Error.NoProfile">No account selected</sys:String>
+    <sys:String x:Key="Skin.Apply.OfflineSuccess">Skin saved locally. Takes effect on next launch (offline).</sys:String>
+    <sys:String x:Key="Skin.Apply.ThirdPartySuccess">Skin saved locally. Takes effect on next launch (third-party).</sys:String>
     <sys:String x:Key="Main.Telemetry.Message">After telemetry data collection is enabled, the launcher will collect and report errors and device environment information. This can help developers fix potential issues and better plan and develop the launcher.&#xA;If this feature is enabled, we will collect the following information:&#xA;&#xA;- Errors that occur in the launcher&#xA;- Launcher version information and identifier&#xA;- Windows system version and architecture&#xA;- Installed physical memory size&#xA;- NAT and IPv6 support status&#xA;- Whether you have used the original PCL, HMCL, or BakaXL&#xA;&#xA;This data is not associated with you, and we will never sell it to any third party.&#xA;If you do not want to enable telemetry, you can choose to decline. This will not affect normal use of other features, but may affect developers' ability to fix potential bugs.&#xA;You can change this setting at any time in launcher settings.</sys:String>
     <sys:String x:Key="Main.Telemetry.Title">Enable telemetry data collection</sys:String>
     <sys:String x:Key="Main.Title.GameLog">Launch log</sys:String>
@@ -3254,8 +3282,6 @@
     <sys:String x:Key="Setup.Update.Channel.Common.Warning.Title">Before continuing...</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Release">Release</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Release.ToolTip">A relatively stable version that only receives bug fixes and some built-in resource updates. Suitable for most users.</sys:String>
-    <sys:String x:Key="Setup.Update.Repository.Title">Update source repository</sys:String>
-    <sys:String x:Key="Setup.Update.Repository.ToolTip">GitHub repository in owner/repo form (for example 12112-boop/PCL-CEX).&#xA;Leave blank to use the built-in default. The launcher reads that repository's Latest Release: the tag is the version, the uploaded exe is the update file, and the release notes are the changelog.</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Title">Update channel</sys:String>
 
     <!-- Setup.Update.Channel.Dev -->

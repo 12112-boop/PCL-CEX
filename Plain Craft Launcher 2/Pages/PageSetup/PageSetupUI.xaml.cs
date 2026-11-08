@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,8 +45,6 @@ public partial class PageSetupUI
         isLoaded = true;
 
         SliderLoad();
-
-        PanLauncherHide.Visibility = Visibility.Visible;
     }
 
     public void Reload()

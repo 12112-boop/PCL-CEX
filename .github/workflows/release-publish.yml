@@ -122,4 +122,21 @@ jobs:
         with:
           tag_name: v${{ inputs.version }}
 
-      # PCL-CEX 已移除 MirrorChyan 分发，发布后只需 Release 本身即可被启动器读取
+      - name: Trigger MirrorChyanUploading
+        run: |
+          MRC_CHANNEL="stable"
+          if [ "${{ inputs.configuration }}" = "Beta" ]; then
+            MRC_CHANNEL="beta"
+          fi
+
+          for arch in x64 arm64; do
+            gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_uploading.yml -f channel=$MRC_CHANNEL -f arch=$arch
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger MirrorChyanReleaseNote
+        run: |
+          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -154,19 +154,14 @@ public static partial class Config
         [ConfigItem<LauncherAutoUpdateBehavior>("SystemSystemUpdate", LauncherAutoUpdateBehavior.DownloadAndAnnounce, ConfigSource.Local)] public partial LauncherAutoUpdateBehavior UpdateMode { get; set; }
 
         /// <summary>
-        /// 更新分支（保留字段以兼容旧配置，本版本不再使用）。
+        /// 更新分支。
         /// </summary>
         [ConfigItem<UpdateChannel>("SystemUpdateChannel", UpdateChannel.Release, ConfigSource.Local)] public partial UpdateChannel UpdateChannel { get; set; }
-
+            
         /// <summary>
-        /// Mirror 酱 CDK（保留字段以兼容旧配置，本版本不再使用）。
+        /// Mirror 酱 CDK。
         /// </summary>
         [ConfigItem<string>("SystemMirrorChyanKey", "", ConfigSource.SharedEncrypt)] public partial string MirrorChyanKey { get; set; }
-
-        /// <summary>
-        /// 自定义更新源仓库，格式为 owner/repo，留空则使用内置默认仓库。
-        /// </summary>
-        [ConfigItem<string>("SystemUpdateRepository", "", ConfigSource.Local)] public partial string Repository { get; set; }
     }
 
     /// <summary>

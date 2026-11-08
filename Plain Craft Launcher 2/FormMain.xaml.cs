@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -1419,6 +1419,11 @@ public partial class FormMain
         ///     存档详细管理，这是一个副页面。
         /// </summary>
         VersionSaves = 12,
+
+        /// <summary>
+        ///     皮肤。
+        /// </summary>
+        Skin = 4,
     }
 
     /// <summary>
@@ -1477,7 +1482,10 @@ public partial class FormMain
         VersionServer = 11,
         VersionModJarInJar = 12,
         VersionSavesInfo = 0,
-        VersionSavesDatapack = 1
+        VersionSavesDatapack = 1,
+
+        SkinLibrary = 0,
+        SkinMine = 1,
     }
 
     /// <summary>
@@ -1871,6 +1879,13 @@ public partial class FormMain
                         ModMain.frmToolsLeft ??= new PageToolsLeft();
                         subType = ModMain.frmToolsLeft.pageID;
                         PageChangeAnim(ModMain.frmToolsLeft, (FrameworkElement)ModMain.frmToolsLeft.PageGet(subType));
+                        break;
+                    }
+                case PageType.Skin: // 皮肤
+                    {
+                        ModMain.frmSkinLeft ??= new PageSkinLeft();
+                        subType = ModMain.frmSkinLeft.pageID;
+                        PageChangeAnim(ModMain.frmSkinLeft, (FrameworkElement)ModMain.frmSkinLeft.PageGet(subType));
                         break;
                     }
                 case PageType.Setup: // 设置

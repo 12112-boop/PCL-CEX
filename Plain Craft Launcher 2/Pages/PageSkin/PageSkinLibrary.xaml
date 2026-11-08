@@ -1,0 +1,36 @@
+<local:MyPageRight
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PCL"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:web="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+    mc:Ignorable="d" x:Class="PCL.PageSkinLibrary"
+    d:DesignWidth="800" d:DesignHeight="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="15,10,15,5">
+            <local:MyButton x:Name="BtnBack" Text="{DynamicResource Common.Action.Back}"
+                            ColorType="Normal" MinWidth="80" Margin="0,0,8,0"
+                            Click="BtnBack_Click" />
+            <local:MyButton x:Name="BtnForward" Text="{DynamicResource Common.Action.Forward}"
+                            ColorType="Normal" MinWidth="80" Margin="0,0,8,0"
+                            Click="BtnForward_Click" />
+            <local:MyButton x:Name="BtnRefresh" Text="{DynamicResource Common.Action.Refresh}"
+                            ColorType="Normal" MinWidth="80" Margin="0,0,8,0"
+                            Click="BtnRefresh_Click" />
+            <local:MyButton x:Name="BtnOpen" Text="{DynamicResource Skin.Library.OpenBrowser}"
+                            ColorType="Highlight" MinWidth="100"
+                            Click="BtnOpen_Click" />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <web:WebView2 x:Name="WebView" />
+            <local:MyHint x:Name="HintStatus" Margin="10" HorizontalAlignment="Stretch"
+                          VerticalAlignment="Bottom" Theme="Blue" Visibility="Collapsed"
+                          Text="{DynamicResource Skin.Library.OpenHint}" />
+        </Grid>
+    </Grid>
+</local:MyPageRight>

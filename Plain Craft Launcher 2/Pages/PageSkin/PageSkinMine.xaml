@@ -1,0 +1,31 @@
+<local:MyPageRight
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PCL"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" x:Class="PCL.PageSkinMine"
+    d:DesignWidth="800" d:DesignHeight="800">
+    <Grid>
+        <local:MyScrollViewer x:Name="PanScroll" VerticalScrollBarVisibility="Auto"
+                             HorizontalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="PanMain" Margin="25,10" Grid.IsSharedSizeScope="True">
+                <local:MyCard Margin="0,15" Title="{DynamicResource Skin.Mine.Title}" CanSwap="True">
+                    <StackPanel Orientation="Vertical" Margin="25,40,21,5">
+                        <TextBlock Text="{DynamicResource Skin.Mine.Description}" TextWrapping="Wrap" />
+                        <WrapPanel x:Name="PanSkinList" Margin="0,20,0,0" ItemHeight="56" />
+                        <local:MyHint x:Name="HintEmpty" Margin="10,20,10,10" Visibility="Collapsed"
+                                      Text="{DynamicResource Skin.Mine.Empty}" Theme="Blue" />
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Right">
+                            <local:MyButton x:Name="BtnImport" Text="{DynamicResource Skin.Mine.Import}"
+                                           ColorType="Normal" MinWidth="100" Margin="0,0,10,0"
+                                           Click="BtnImport_Click" />
+                            <local:MyButton x:Name="BtnOpenFolder" Text="{DynamicResource Skin.Mine.OpenFolder}"
+                                           ColorType="Normal" MinWidth="100" Click="BtnOpenFolder_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                </local:MyCard>
+            </StackPanel>
+        </local:MyScrollViewer>
+    </Grid>
+</local:MyPageRight>

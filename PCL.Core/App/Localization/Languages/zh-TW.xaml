@@ -78,6 +78,10 @@
     <sys:String x:Key="Common.Action.OpenFolder">開啟資料夾</sys:String>
     <sys:String x:Key="Common.Action.Overwrite">覆蓋</sys:String>
     <sys:String x:Key="Common.Action.Refresh">重新整理</sys:String>
+    <sys:String x:Key="Common.Action.Forward">前進</sys:String>
+    <sys:String x:Key="Skin.Library.OpenBrowser">用瀏覽器打開</sys:String>
+    <sys:String x:Key="Skin.Library.OpenHint">內嵌瀏覽器內核較舊，小皮膚站可能拒絕服務。請點擊「用瀏覽器打開」，使用系統預設瀏覽器（Chrome/Edge/Firefox）瀏覽皮膚庫並下載皮膚，完成後在「我的皮膚」中匯入並套用。</sys:String>
+    <sys:String x:Key="Skin.Library.WebViewError">WebView2 初始化失敗：{0}。請用預設瀏覽器打開小皮膚。</sys:String>
     <sys:String x:Key="Common.Action.Reset">重設</sys:String>
     <sys:String x:Key="Common.Action.Search">搜尋</sys:String>
     <sys:String x:Key="Common.Action.UpdateLog">更新紀錄</sys:String>
@@ -1475,15 +1479,6 @@
     <sys:String x:Key="Launch.Right.CommunityHint.Title">PCL-CEX 提示</sys:String>
     <sys:String x:Key="Launch.Right.CommunityHint.WrongInput">不太對哦……</sys:String>
     <sys:String x:Key="Launch.Right.Log.Title">啟動日誌</sys:String>
-    <sys:String x:Key="Launch.Announcement.Title">公告</sys:String>
-    <sys:String x:Key="Launch.Announcement.Empty">暫無公告</sys:String>
-    <sys:String x:Key="Launch.Announcement.Collapse">收合公告欄</sys:String>
-    <sys:String x:Key="Launch.Announcement.Expand">展開公告欄</sys:String>
-    <sys:String x:Key="Launch.Announcement.Pinned">置頂</sys:String>
-    <sys:String x:Key="Launch.Announcement.Refresh">重新整理公告</sys:String>
-    <sys:String x:Key="Launch.Announcement.Refreshed">公告已重新整理</sys:String>
-    <sys:String x:Key="Launch.Announcement.RefreshFailed">重新整理公告失敗，請檢查網路連線</sys:String>
-    <sys:String x:Key="Launch.Announcement.More">還有 {0} 條公告未顯示</sys:String>
 
     <!-- Launch.Account -->
 
@@ -1618,7 +1613,9 @@
     <sys:String x:Key="Launch.Account.ProfileSkin.PasswordUnsupported">目前檔案不支援修改密碼！</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.RefreshSkin">重新整理大頭貼</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.SaveSkin">儲存外觀</sys:String>
+    <sys:String x:Key="Launch.Account.ProfileSkin.FromLibrary">從皮膚庫選擇</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.SkinUnsupported">目前檔案不支援修改外觀！</sys:String>
+    <sys:String x:Key="Launch.Account.ProfileSkin.LibraryEmpty">皮膚庫為空，請先去「皮膚」標籤頁下載喜歡的皮膚</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.SkinsAndCapes">外觀與披風</sys:String>
     <sys:String x:Key="Launch.Account.ProfileSkin.SwitchProfile">選擇檔案</sys:String>
 
@@ -1879,6 +1876,39 @@
     <sys:String x:Key="Main.Tab.Launch">啟動</sys:String>
     <sys:String x:Key="Main.Tab.Settings">設定</sys:String>
     <sys:String x:Key="Main.Tab.Tools">工具</sys:String>
+    <sys:String x:Key="Main.Tab.Skin">皮膚</sys:String>
+    <sys:String x:Key="Main.Tab.SkinLibrary">皮膚庫</sys:String>
+    <sys:String x:Key="Main.Tab.SkinMine">我的皮膚</sys:String>
+    <sys:String x:Key="Skin.Left.Library">小皮膚庫</sys:String>
+    <sys:String x:Key="Skin.Left.LibraryInfo">瀏覽並下載小皮膚</sys:String>
+    <sys:String x:Key="Skin.Left.Mine">本機</sys:String>
+    <sys:String x:Key="Skin.Library.Title">小皮膚庫</sys:String>
+    <sys:String x:Key="Skin.Library.Description">來自 littleskin.cn 的熱門皮膚，點擊「下載」按鈕取得並套用。</sys:String>
+    <sys:String x:Key="Skin.Library.Empty">暫無皮膚</sys:String>
+    <sys:String x:Key="Skin.Library.FetchError">取得皮膚清單失敗，請檢查網路。</sys:String>
+    <sys:String x:Key="Skin.Library.Download">下載</sys:String>
+    <sys:String x:Key="Skin.Library.DownloadSuccess">皮膚「{0}」已下載，準備套用。</sys:String>
+    <sys:String x:Key="Skin.Library.DownloadError">下載皮膚失敗：{0}</sys:String>
+    <sys:String x:Key="Skin.Mine.Title">我的皮膚</sys:String>
+    <sys:String x:Key="Skin.Mine.Description">本機已儲存的皮膚檔案，可一鍵套用或刪除。</sys:String>
+    <sys:String x:Key="Skin.Mine.Empty">還沒有儲存的皮膚，可匯入本機皮膚檔案。</sys:String>
+    <sys:String x:Key="Skin.Mine.Apply">套用</sys:String>
+    <sys:String x:Key="Skin.Mine.Delete">刪除</sys:String>
+    <sys:String x:Key="Skin.Mine.DeleteConfirm">確認刪除「{0}」？</sys:String>
+    <sys:String x:Key="Skin.Mine.DeleteSuccess">已刪除「{0}」。</sys:String>
+    <sys:String x:Key="Skin.Mine.Import">匯入</sys:String>
+    <sys:String x:Key="Skin.Mine.Import.Filter">皮膚檔案(*.png)|*.png</sys:String>
+    <sys:String x:Key="Skin.Mine.Import.Title">選擇皮膚檔案</sys:String>
+    <sys:String x:Key="Skin.Mine.ImportSuccess">已匯入「{0}」。</sys:String>
+    <sys:String x:Key="Skin.Mine.ImportError">匯入失敗：{0}</sys:String>
+    <sys:String x:Key="Skin.Mine.OpenFolder">開啟目錄</sys:String>
+    <sys:String x:Key="Skin.Mine.ApplyError">套用失敗：{0}</sys:String>
+    <sys:String x:Key="Skin.Error.FileMissing">皮膚檔案不存在</sys:String>
+    <sys:String x:Key="Skin.Error.FileTooLarge">皮膚檔案過大（{0} KB）</sys:String>
+    <sys:String x:Key="Skin.Error.InvalidSize">皮膚尺寸無效</sys:String>
+    <sys:String x:Key="Skin.Error.NoProfile">未選擇帳號</sys:String>
+    <sys:String x:Key="Skin.Apply.OfflineSuccess">皮膚已儲存至本機，離線模式下次啟動生效。</sys:String>
+    <sys:String x:Key="Skin.Apply.ThirdPartySuccess">皮膚已儲存至本機，第三方帳號下次啟動生效。</sys:String>
     <sys:String x:Key="Main.Telemetry.Message">啟用遙測資料收集後，啟動器將會收集並上報錯誤與裝置環境資訊，這可以幫助開發者修復潛在的問題、更好的進行規劃和開發。&#xA;若啟用此功能，我們將會收集以下資訊：&#xA;&#xA;- 啟動器內出現的錯誤&#xA;- 啟動器版本資訊與識別碼&#xA;- Windows 系統版本與架構&#xA;- 已安裝的實體記憶體大小&#xA;- NAT 與 IPv6 支援情況&#xA;- 是否使用過原版 PCL、HMCL 或 BakaXL&#xA;&#xA;這些資料均不與你關聯，我們也絕不會向第三方出售資料。&#xA;如果不希望啟用遙測，可以選擇拒絕。這不會影響其他功能的正常使用，但可能會影響開發者修復潛在 Bug。&#xA;你可以隨時在啟動器設定中調整這項設定。</sys:String>
     <sys:String x:Key="Main.Telemetry.Title">啟用遙測資料收集</sys:String>
     <sys:String x:Key="Main.Title.GameLog">即時日誌</sys:String>
@@ -3254,8 +3284,6 @@
     <sys:String x:Key="Setup.Update.Channel.Common.Warning.Title">繼續之前...</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Release">正式版 / Release</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Release.ToolTip">較為穩定的版本，僅推送修復性更新與部分內建資源更新，適合大多數使用者使用。</sys:String>
-    <sys:String x:Key="Setup.Update.Repository.Title">更新源倉庫</sys:String>
-    <sys:String x:Key="Setup.Update.Repository.ToolTip">填寫 GitHub 倉庫，格式為 owner/repo（例如 12112-boop/PCL-CEX）。&#xA;留空則使用內建預設倉庫。啟動器會讀取該倉庫的 Latest Release：tag 作為版本號，上傳的 exe 作為更新檔案，Release 說明作為更新日誌。</sys:String>
     <sys:String x:Key="Setup.Update.Channel.Title">更新通道</sys:String>
 
     <!-- Setup.Update.Channel.Dev -->

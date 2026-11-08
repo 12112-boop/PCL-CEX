@@ -39,6 +39,8 @@
                         <ContextMenu Closed="MenuAccountOptions_Closed" HorizontalOffset="10" VerticalOffset="18">
                             <local:MyMenuItem Click="Skin_Click"
                                               Header="{DynamicResource Launch.Account.ProfileSkin.ChangeSkin}" />
+                            <local:MyMenuItem Click="BtnSkinLibrary_Click"
+                                              Header="{DynamicResource Launch.Account.ProfileSkin.FromLibrary}" />
                             <local:MyMenuItem Click="BtnSkinSave_Click"
                                               Header="{DynamicResource Launch.Account.ProfileSkin.SaveSkin}" />
                             <local:MyMenuItem Click="BtnSkinRefresh_Click"

@@ -93,6 +93,9 @@ public static class ModMain
     public static PageInstanceSavesDatapack? frmInstanceSavesDatapack;
     public static PageDownloadCompDetail? frmDownloadCompDetail;
     public static PageHomepageNewsView? frmHomepageNews;
+    public static PageSkinLeft? frmSkinLeft;
+    public static PageSkinLibrary? frmSkinLibrary;
+    public static PageSkinMine? frmSkinMine;
 
     public static MySlider? dragControl = null;
     private static int timer4Count;

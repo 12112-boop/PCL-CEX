@@ -138,6 +138,42 @@ public partial class PageLoginProfileSkin
                 HintService.Hint(Lang.Text("Launch.Account.ProfileSkin.SkinUnsupported"));
     }
 
+    // 从皮肤库一键应用（直接使用最新添加的皮肤）
+    private void BtnSkinLibrary_Click(object sender, RoutedEventArgs e)
+    {
+        var list = ModSkinStore.ListStored();
+        if (list.Count == 0)
+        {
+            HintService.Hint(Lang.Text("Launch.Account.ProfileSkin.LibraryEmpty"), HintType.Error);
+            return;
+        }
+        // 取最新添加的一张直接应用（不弹选择框，真正的一键）
+        var s = list.OrderByDescending(x => x.AddedAt).First();
+        ApplySkin(s);
+        // 同时切换到「我的皮肤」标签页展示结果
+        ModMain.frmMain?.PageChange(FormMain.PageType.Skin, FormMain.PageSubType.SkinMine);
+    }
+
+    private void ApplySkin(ModSkinStore.StoredSkin s)
+    {
+        ModBase.RunInNewThread(() =>
+        {
+            try
+            {
+                ModSkinStore.ValidateSkin(s.LocalFile);
+                var isSlim = s.Name.Contains("slim", StringComparison.OrdinalIgnoreCase) ? "slim" : "classic";
+                ModSkinStore.ApplyStored(s.LocalFile, isSlim);
+            }
+            catch (Exception ex)
+            {
+                ModBase.Log(ex, "应用皮肤失败", ModBase.LogLevel.Hint,
+                    userSummary: Lang.Text("Skin.Mine.ApplyError", ex.Message));
+                ModBase.RunInUi(() =>
+                    HintService.Hint(Lang.Text("Skin.Mine.ApplyError", ex.Message), HintType.Error));
+            }
+        }, "Skin Apply " + s.Name);
+    }
+
     // 保存皮肤
     private void BtnSkinSave_Click(object sender, RoutedEventArgs e)
     {

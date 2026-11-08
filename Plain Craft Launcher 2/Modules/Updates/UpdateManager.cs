@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using PCL.Core.App;
@@ -12,61 +12,46 @@ public static class UpdateManager
 {
     public static bool isUpdateWaitingRestart;
 
-    private static UpdatesGitHubReleaseModel _gitHubSource;
-    private static UpdatesWrapperModel _remoteServer;
+    public static UpdatesWrapperModel remoteServer = new(new List<IUpdateSource>
+    {
+        new UpdatesMirrorChyanModel(),
+        new UpdatesRandomModel(new[]
+        {
+            new UpdatesMinioModel("https://s3.pysio.online/pcl2-ce/", "Pysio"),
+            new UpdatesMinioModel("https://staticassets.naids.com/resources/pclce/", "Naids")
+        }),
+        new UpdatesMinioModel("https://github.com/PCL-Community/PCL2_CE_Server/raw/main/", "GitHub")
+    });
 
-    /// <summary>
-    ///     唯一更新源：PCL-CEX 自己的 GitHub Releases。
-    ///     仓库名可在「设置 → 更新」中修改，默认见
-    ///     <see cref="UpdatesGitHubReleaseModel.DefaultRepository" />。
-    ///     延迟初始化，避免静态构造早于配置加载。
-    /// </summary>
-    public static UpdatesGitHubReleaseModel gitHubSource
+    public static bool IsCurrentVersionBeta
     {
         get
         {
-            if (_gitHubSource is null) ReloadSource();
-            return _gitHubSource;
+            if (ModBase.versionBaseName.Contains("beta"))
+                return true;
+            return (int)Config.Update.UpdateChannel == 1;
         }
     }
-
-    public static UpdatesWrapperModel remoteServer
-    {
-        get
-        {
-            if (_remoteServer is null) ReloadSource();
-            return _remoteServer;
-        }
-    }
-
-    /// <summary>
-    ///     仓库被用户改动后调用：重建更新源并清空缓存。
-    /// </summary>
-    public static void ReloadSource()
-    {
-        string repository;
-        try
-        {
-            repository = Config.Update.Repository;
-        }
-        catch
-        {
-            repository = null;
-        }
-
-        _gitHubSource = new UpdatesGitHubReleaseModel(repository);
-        _remoteServer = new UpdatesWrapperModel(new IUpdateSource[] { _gitHubSource });
-    }
-
-    /// <summary>本项目只有一个更新通道，恒为稳定通道。</summary>
-    public static bool IsCurrentVersionBeta => ModBase.versionBaseName.Contains("beta");
     
     public static UpdateEnums.VersionStatus GetVersionStatus()
     {
         try
         {
+            if (IsCurrentVersionBeta && (int)Config.Update.UpdateChannel != 1)
+            {
+                var isNewerThanStable = remoteServer.IsLatest(UpdateChannel.stable,
+                    SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64, SemVer.Parse(ModBase.versionBaseName),
+                    ModBase.versionCode);
+                var isBetaLatest = remoteServer.IsLatest(UpdateChannel.beta,
+                    SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64, SemVer.Parse(ModBase.versionBaseName),
+                    ModBase.versionCode);
+                return isNewerThanStable && isBetaLatest
+                    ? UpdateEnums.VersionStatus.Latest
+                    : UpdateEnums.VersionStatus.NotLatest;
+            }
+
             return remoteServer.IsLatest(
-                UpdateChannel.stable,
+                IsCurrentVersionBeta ? UpdateChannel.beta : UpdateChannel.stable,
                 SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64, SemVer.Parse(ModBase.versionBaseName),
                 ModBase.versionCode)
                 ? UpdateEnums.VersionStatus.Latest
@@ -93,7 +78,7 @@ public static class UpdateManager
             try
             {
                 var version = remoteServer.GetLatestVersion(
-                    UpdateChannel.stable,
+                    IsCurrentVersionBeta ? UpdateChannel.beta : UpdateChannel.stable,
                     SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64
                 );
 
@@ -120,13 +105,10 @@ public static class UpdateManager
                 var loaders = new List<ModLoader.LoaderBase>();
                 // 下载
                 loaders.AddRange(remoteServer.GetDownloadLoader(
-                    UpdateChannel.stable,
+                    IsCurrentVersionBeta ? UpdateChannel.beta : UpdateChannel.stable,
                     SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64, dlTargetPath));
                 loaders.Add(new ModLoader.LoaderTask<int, int>(Lang.Text("Update.Task.Check"), _ =>
                 {
-                    // 只有远端提供了哈希才校验；GitHub 老版本 Release 可能没有 digest
-                    if (string.IsNullOrWhiteSpace(version.Sha256))
-                        return;
                     var curHash = ModBase.GetFileSHA256(dlTargetPath);
                     if ((curHash ?? "") != (version.Sha256 ?? ""))
                         throw new Exception(Lang.Text("Update.Error.Sha256Mismatch", version.Sha256, curHash));
@@ -283,7 +265,7 @@ public static class UpdateManager
     }
 
     /// <summary>
-    ///     展示版本说明（首次运行或更新后）。
+    ///     展示社区版提示
     /// </summary>
     /// <param name="IsUpdate">是否为更新时启动</param>
     public static void ShowCEAnnounce()

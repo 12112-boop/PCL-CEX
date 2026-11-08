@@ -436,6 +436,17 @@ public static class ProfileUi
 
     public static void ChangeSkinMs()
     {
+        var skinInfo = ModSkin.McSkinSelect();
+        if (!skinInfo.IsVaild)
+            return;
+        ChangeSkinMs(skinInfo.LocalFile, skinInfo.IsSlim ? "slim" : "classic");
+    }
+
+    /// <summary>
+    ///     使用本地皮肤文件直接替换 Microsoft 账号皮肤，绕过文件选择器。
+    /// </summary>
+    public static void ChangeSkinMs(string localFile, string isSlim)
+    {
         if (Interlocked.Exchange(ref _isMsSkinChanging, 1) != 0)
         {
             HintService.Hint(Lang.Text("Launch.Skin.Change.Busy"));
@@ -455,12 +466,6 @@ public static class ProfileUi
             HintService.Hint(Lang.Text("Launch.Skin.Change.LoginFailed"), HintType.Error);
             return;
         }
-        var skinInfo = ModSkin.McSkinSelect();
-        if (!skinInfo.IsVaild)
-        {
-            Interlocked.Exchange(ref _isMsSkinChanging, 0);
-            return;
-        }
         HintService.Hint(Lang.Text("Launch.Skin.Change.Starting"));
         ModBase.RunInNewThread(() =>
         {
@@ -477,8 +482,8 @@ public static class ProfileUi
                                         ?? throw new InvalidOperationException("Microsoft profile no longer exists.");
                     using var contents = new MultipartFormDataContent
                     {
-                        { new StringContent(skinInfo.IsSlim ? "slim" : "classic"), "variant" },
-                        { new ByteArrayContent(ModBase.ReadFileBytes(skinInfo.LocalFile)), "file", ModBase.GetFileNameFromPath(skinInfo.LocalFile) }
+                        { new StringContent(isSlim == "slim" ? "slim" : "classic"), "variant" },
+                        { new ByteArrayContent(ModBase.ReadFileBytes(localFile)), "file", ModBase.GetFileNameFromPath(localFile) }
                     };
                     var result = Requester.Fetch("https://api.minecraftservices.com/minecraft/profile/skins", new FetchParam
                     {
