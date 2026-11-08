@@ -14,13 +14,6 @@ namespace PCL;
 
 public partial class PageSetupUI
 {
-    public string[] ThemeColors => [
-        Lang.Text("Setup.Ui.Theme.Color.SkyBlue"),
-        Lang.Text("Setup.Ui.Theme.Color.CatBlue"),
-        Lang.Text("Setup.Ui.Theme.Color.CrashBlue"),
-        Lang.Text("Setup.Ui.Theme.Color.Hmcl")
-    ];
-    
     public new bool isLoaded;
 
     public PageSetupUI()
@@ -55,19 +48,7 @@ public partial class PageSetupUI
             SliderLauncherOpacity.Value = Config.Preference.Theme.WindowOpacity;
             CheckLauncherLogo.Checked = Config.Preference.ShowStartupLogo;
             ComboDarkMode.SelectedIndex = (int)Config.Preference.Theme.ColorMode;
-            // 预设配色下拉不再包含自定义项，越界的旧配置回退到第一项
-            ComboDarkColor.SelectedIndex = Math.Clamp((int)Config.Preference.Theme.DarkColor, 0, ThemeColors.Length - 1);
-            ComboLightColor.SelectedIndex = Math.Clamp((int)Config.Preference.Theme.LightColor, 0, ThemeColors.Length - 1);
             CheckShowLaunchingHint.Checked = Config.Preference.ShowLaunchingHint;
-
-            // 自定义主题配色
-            CheckCustomTheme.Checked = Config.Preference.Theme.CustomThemeEnabled;
-            SliderThemeHue.Value = Config.Preference.Theme.WindowHue;
-            SliderThemeSat.Value = Config.Preference.Theme.WindowSat;
-            SliderThemeLight.Value = Config.Preference.Theme.WindowLight;
-            SliderThemeDelta.Value = Config.Preference.Theme.WindowDelta;
-            PanCustomTheme.Visibility =
-                Config.Preference.Theme.CustomThemeEnabled ? Visibility.Visible : Visibility.Collapsed;
 
             // 第二个窗口
             CheckAllowSecondWindow.Checked = Config.Preference.Theme.AllowSecondWindow;
@@ -251,11 +232,6 @@ public partial class PageSetupUI
 
         switch (sender.Tag?.ToString())
         {
-            // 自定义主题配色展开
-            case "UiCustomTheme" when PanCustomTheme is not null:
-                PanCustomTheme.Visibility = sender.Checked == true ? Visibility.Visible : Visibility.Collapsed;
-                CardLauncher.TriggerForceResize();
-                break;
             // 第二个窗口开关联动
             case "UiAllowSecondWindow" when BtnLaunchSecondWindow is not null:
                 BtnLaunchSecondWindow.IsEnabled = sender.Checked == true;
@@ -706,14 +682,6 @@ public partial class PageSetupUI
         ModBase.OpenWebsite("https://docs.pclc.cc/ce/customization/xaml-format");
     }
 
-    // 主题
-    private void ThemeColor_Change(object senderRaw, SelectionChangedEventArgs e)
-    {
-        var sender = (MyComboBox)senderRaw;
-        SetByTag(sender.Tag?.ToString(), sender.SelectedIndex);
-        ThemeManager.ThemeRefresh();
-    }
-
     // 第二个窗口配色
     private void ComboSecondWindowTheme_Change(object sender, SelectionChangedEventArgs e)
     {
@@ -765,10 +733,6 @@ public partial class PageSetupUI
         SliderBackgroundBlur.getHintText = new Func<object, object>(v => Lang.Text("Setup.Ui.Slider.Pixel", Lang.Number(Convert.ToDouble(v), "N0")));
         SliderBlurValue.getHintText = new Func<object, object>(v => Lang.Text("Setup.Ui.Slider.Pixel", Lang.Number(Convert.ToDouble(v), "N0")));
         SliderBlurSamplingRate.getHintText = new Func<object, object>(v => Lang.Number(Convert.ToDouble(v) / 100d, "P0"));
-        SliderThemeHue.getHintText = new Func<object, object>(v => Lang.Number(Convert.ToDouble(v), "N0") + "°");
-        SliderThemeSat.getHintText = new Func<object, object>(v => Lang.Number(Convert.ToDouble(v) / 100d, "P0"));
-        SliderThemeLight.getHintText = new Func<object, object>(v => Lang.Number(Convert.ToDouble(v) / 100d, "P0"));
-        SliderThemeDelta.getHintText = new Func<object, object>(v => Lang.Number(Convert.ToDouble(v), "N0") + "°");
         SliderSecondWindowHue.getHintText = new Func<object, object>(v => Lang.Number(Convert.ToDouble(v), "N0") + "°");
         SliderAnimationSpeed.getHintText = new Func<object, object>(v =>
         {
