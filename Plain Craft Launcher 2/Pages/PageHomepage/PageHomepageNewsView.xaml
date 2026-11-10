@@ -116,6 +116,54 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
+        <!-- AI 崩溃分析卡片：首页顶部独立区块，游戏崩溃后显示本地规则分析结果，
+             并可通过「AI 深入分析」按钮调用已配置的 AI 接口生成更深入诊断。 -->
+        <local:MyCard x:Name="CardCrashAnalysis"
+                      Margin="0,10,0,10"
+                      VerticalAlignment="Top"
+                      Visibility="Collapsed">
+            <StackPanel Margin="12">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{DynamicResource CrashAgent.Title}"
+                                   FontSize="15" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ColorBrush1}" />
+                        <TextBlock x:Name="TxtCrashMeta"
+                                   Foreground="{DynamicResource ColorBrushGray2}"
+                                   FontSize="12" Margin="0,3,0,0"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                        <local:MyButton x:Name="BtnAiAnalyze"
+                                        Text="{DynamicResource CrashAgent.Analyze}"
+                                        MinWidth="110" Height="30"
+                                        Margin="8,0,0,0"
+                                        Click="BtnAiAnalyze_Click" />
+                        <local:MyButton x:Name="BtnDismissCrash"
+                                        Text="{DynamicResource CrashAgent.Dismiss}"
+                                        MinWidth="72" Height="30"
+                                        Margin="6,0,0,0"
+                                        Click="BtnDismissCrash_Click" />
+                    </StackPanel>
+                </Grid>
+                <TextBlock x:Name="TxtCrashLocal"
+                           Margin="0,10,0,0"
+                           Foreground="{DynamicResource ColorBrush1}"
+                           TextWrapping="Wrap"
+                           FontSize="13" />
+                <TextBlock x:Name="TxtCrashAi"
+                           Margin="0,10,0,0"
+                           Foreground="{DynamicResource ColorBrushGray4}"
+                           TextWrapping="Wrap"
+                           FontSize="13"
+                           Visibility="Collapsed" />
+            </StackPanel>
+        </local:MyCard>
+
         <TextBlock
             Foreground="{DynamicResource ColorBrushRedLight}"
             Text="{Binding ErrorMessage}"

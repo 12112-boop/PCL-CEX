@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.IO;
 using PCL.Core.App;
 using PCL.Core.App.Localization;
@@ -24,6 +24,29 @@ internal sealed class CrashDialogPresenter(CrashAnalysisContext context)
         var openInstanceSettings =
             context.Instance is not null &&
             crashContent.SuggestedAction == CrashSuggestedAction.OpenInstanceSettings;
+
+        // 持久化最近崩溃摘要，供首页「AI 崩溃分析」卡片展示
+        try
+        {
+            var instance = context.Instance;
+            var firstFinding = context.Result?.Findings.FirstOrDefault();
+            CrashStore.Save(new RecentCrashInfo
+            {
+                DetectedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                Version = instance is not null
+                    ? instance.Name
+                    : string.Empty,
+                Reason = resultText,
+                Suggestion = firstFinding is not null
+                    ? string.Join(Environment.NewLine, firstFinding.Details)
+                    : string.Empty,
+                RawSummary = resultText
+            });
+        }
+        catch
+        {
+            // 持久化失败不影响弹窗
+        }
 
         var title = isHandAnalyze
             ? Lang.Text("Crash.Dialog.Title.Manual")

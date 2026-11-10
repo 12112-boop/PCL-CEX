@@ -124,6 +124,14 @@
     <sys:String x:Key="Crash.Export.Failed.Message">The crash report could not be exported.&#xA;&#xA;Target path: {0}</sys:String>
     <sys:String x:Key="Crash.Export.Failed.MessageWithoutPath">The crash report could not be exported, and the target path is unavailable.</sys:String>
     <sys:String x:Key="Crash.Export.Failed.Title">Failed to export crash report</sys:String>
+    <sys:String x:Key="CrashAgent.Title">AI Crash Analysis</sys:String>
+    <sys:String x:Key="CrashAgent.Meta">Detected at: {0} | Game version: {1}</sys:String>
+    <sys:String x:Key="CrashAgent.Analyze">Analyze with AI</sys:String>
+    <sys:String x:Key="CrashAgent.Dismiss">Dismiss</sys:String>
+    <sys:String x:Key="CrashAgent.Analyzing">Analyzing, please wait…</sys:String>
+    <sys:String x:Key="CrashAgent.Error.NoCrash">No recent crash detected.</sys:String>
+    <sys:String x:Key="CrashAgent.Error.NotConfigured">AI API is not configured. Please set the API base URL and model under Tools → AI Chat first, then try again.</sys:String>
+    <sys:String x:Key="CrashAgent.Error.AnalyzeFailed">AI analysis failed: {0}</sys:String>
     <sys:String x:Key="Crash.Presentation.ListItem"> - {0}</sys:String>
     <sys:String x:Key="Crash.Presentation.ReasonOnly">Cause&#xA;{0}</sys:String>
     <sys:String x:Key="Crash.Presentation.WithFollowUps">{0}&#xA;&#xA;{1}</sys:String>
