@@ -31,8 +31,12 @@ public partial class NewsViewModel : ObservableObject
     [ObservableProperty]
     private string? _errorMessage;
 
+    [ObservableProperty]
+    private bool _hasNews;
+
     public NewsViewModel()
     {
+        NewsItems.CollectionChanged += (_, _) => HasNews = NewsItems.Count > 0;
         _LoadDataCommand.Execute(null);
     }
 

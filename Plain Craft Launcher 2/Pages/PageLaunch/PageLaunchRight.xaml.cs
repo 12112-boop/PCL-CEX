@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Globalization;
 using System.Reflection;
 using System.Windows;
@@ -244,10 +244,64 @@ public partial class PageLaunchRight : IRefreshable
                         PanCustom.Children.Add(ModMain.frmHomepageNews);
                     });
                     return;
+
+                case 16:
+                    LogWrapper.Info("[Page] 主页预设：AI 崩溃分析（默认主页，自动附带崩溃卡片）");
+                    Dispatcher.Invoke(() =>
+                    {
+                        if (ModMain.frmHomepageNews is null)
+                            ModMain.frmHomepageNews = new PageHomepageNewsView();
+                        PanCustom.Children.Clear();
+                        PanCustom.Children.Add(ModMain.frmHomepageNews);
+                    });
+                    return;
             }
         }
 
         ModBase.RunInUi(() => LoadContent(content));
+
+        // AI 崩溃分析卡片：与主页内容无关，只要存在最近崩溃记录就始终在首页顶部显示
+        ModBase.RunInUi(_EnsureCrashCard);
+    }
+
+    /// <summary>
+    ///     若存在最近崩溃报告，在主页顶部插入「AI 崩溃分析」卡片（不随主页预设/内容变化而消失）。
+    /// </summary>
+    private void _EnsureCrashCard()
+    {
+        try
+        {
+            var hasCrash = CrashStore.Load() is not null;
+            var existing = ModMain.frmCrashCard;
+
+            if (!hasCrash)
+            {
+                // 无崩溃记录：移除已存在的卡片
+                if (existing is not null)
+                {
+                    PanCustom.Children.Remove(existing);
+                    ModMain.frmCrashCard = null;
+                }
+                return;
+            }
+
+            if (existing is not null)
+            {
+                // 卡片已存在，刷新数据即可
+                existing.RefreshCrashCard();
+                return;
+            }
+
+            // 创建新卡片并置顶
+            var card = new CrashAnalysisCard();
+            ModMain.frmCrashCard = card;
+            PanCustom.Children.Insert(0, card);
+            card.RefreshCrashCard();
+        }
+        catch (Exception ex)
+        {
+            ModBase.Log(ex, "AI 崩溃分析卡片插入失败", ModBase.LogLevel.Hint);
+        }
     }
 
     /// <summary>

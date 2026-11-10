@@ -93,6 +93,7 @@ public static class ModMain
     public static PageInstanceSavesDatapack? frmInstanceSavesDatapack;
     public static PageDownloadCompDetail? frmDownloadCompDetail;
     public static PageHomepageNewsView? frmHomepageNews;
+    public static CrashAnalysisCard? frmCrashCard;
     public static PageSkinLeft? frmSkinLeft;
     public static PageSkinLibrary? frmSkinLibrary;
     public static PageSkinMine? frmSkinMine;
