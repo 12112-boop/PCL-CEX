@@ -48,6 +48,9 @@ internal sealed class CrashDialogPresenter(CrashAnalysisContext context)
             // 持久化失败不影响弹窗
         }
 
+        // 立即通知主页刷新 AI 崩溃分析卡片（无需重启）
+        ModBase.RunInUiWait(() => ModMain._RefreshCrashCard());
+
         var title = isHandAnalyze
             ? Lang.Text("Crash.Dialog.Title.Manual")
             : Lang.Text("Crash.Dialog.Title.Auto");

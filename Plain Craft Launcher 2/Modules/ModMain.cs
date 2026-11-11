@@ -1164,7 +1164,43 @@ public static class ModMain
     }
 
     #endregion
-    
+
+    /// <summary>
+    ///     刷新首页的 AI 崩溃分析卡片（由 CrashDialogPresenter 在崩溃分析完成后调用）。
+    /// </summary>
+    public static void _RefreshCrashCard()
+    {
+        if (frmCrashCard is not null)
+        {
+            frmCrashCard.RefreshCrashCard();
+            return;
+        }
+
+        // 若卡片尚未创建，且存在崩溃记录，则即时创建并插入
+        if (CrashStore.Load() is null)
+            return;
+
+        var page = frmLaunchRight;
+        if (page is null) return;
+
+        // 通过反射获取 PanCustom（x:Name 字段）
+        var panField = typeof(PageLaunchRight).GetField("PanCustom",
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
+        if (panField?.GetValue(page) is not System.Windows.Controls.Panel pan) return;
+
+        var existing = frmCrashCard;
+        if (existing is not null)
+        {
+            existing.RefreshCrashCard();
+            return;
+        }
+
+        var card = new CrashAnalysisCard();
+        frmCrashCard = card;
+        pan.Children.Insert(0, card);
+        card.RefreshCrashCard();
+    }
+
     public static void RaiseCustomEvent(DependencyObject control)
     {
         // 收集事件列表
