@@ -132,6 +132,11 @@ public static partial class States
         /// 已阅读的公告。
         /// </summary>
         [ConfigItem<string>("ReadAnnouncements", "")] public partial string ReadAnnouncements { get; set; }
+
+        /// <summary>
+        /// 公告栏是否折叠。
+        /// </summary>
+        [ConfigItem<bool>("AnnouncementBoardCollapsed", false)] public partial bool AnnouncementBoardCollapsed { get; set; }
     }
 
     /// <summary>
