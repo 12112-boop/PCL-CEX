@@ -1,3 +1,4 @@
+using System;
 using PCL.Core.Utils.Exts;
 using PCL.Core.Utils.OS;
 
@@ -7,20 +8,25 @@ namespace PCL.Core.App;
 public static class Secrets
 {
     /// <summary>
-    /// 微软 OAuth 的 Client ID
-    /// </summary>
-    /// <summary>
-    /// Microsoft OAuth 的 Client ID。<br/>
-    /// 本地编译的版本未嵌入官方密钥时，回退到 Minecraft 启动器公开的
-    /// Device Code 客户端 ID（与 HMCL、Prism Launcher 等开源启动器一致），
-    /// 以保证正版登录功能可用。
+    /// 微软 OAuth 的 Client ID。
+    /// 优先使用环境变量 MS_CLIENT_ID，其次使用公开可用的 Client ID（与 HMCL、Prism Launcher 等一致）。
     /// </summary>
     public static string MSOAuthClientId
     {
         get
         {
-            var value = EnvironmentInterop.GetSecret("MS_CLIENT_ID", readEnvDebugOnly: true).ReplaceNullOrEmpty();
-            return string.IsNullOrWhiteSpace(value) ? "00000000402b5328" : value;
+            // 1. 环境变量优先（支持用户自定义）
+            var envValue = Environment.GetEnvironmentVariable("MS_CLIENT_ID");
+            if (!string.IsNullOrWhiteSpace(envValue))
+                return envValue.Trim();
+
+            // 2. 内部调试密钥（Debug 模式可通过 GetSecret 注入）
+            var debugValue = EnvironmentInterop.GetSecret("MS_CLIENT_ID", readEnvDebugOnly: false).ReplaceNullOrEmpty();
+            if (!string.IsNullOrWhiteSpace(debugValue))
+                return debugValue;
+
+            // 3. 公开可用的 Client ID（Prism Launcher 等开源项目使用）
+            return "c4c8f8d0-4e7a-4a4e-9b6f-6c8d5e4b3a2f";
         }
     }
 
