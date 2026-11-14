@@ -149,6 +149,35 @@ public static class ProfileUi
         return completion.Task;
     }
 
+    /// <summary>
+    ///     微软内嵌 WebView2 登录。用户在启动器内联窗口中完成登录，无需离开当前界面，
+    ///     也不用手动复制设备码。DeviceCode 仅用于后端轮询。
+    /// </summary>
+    public static Task<AuthorizeResult?> ShowMsWebLoginAsync(DeviceCodeAuthenticationContext context,
+        CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        var completion = new TaskCompletionSource<AuthorizeResult?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var converter = new ModMain.MyMsgBoxConverter
+        {
+            Content = context,  // 直接传 context 对象（含 Func），不序列化
+            ForceWait = true,
+            Type = ModMain.MyMsgBoxType.MsWeb,
+            DeviceCodePoll = (_, pollToken) => context.PollAsync(pollToken),
+            LoginResultHandler = (oauth, _) =>
+            {
+                completion.TrySetResult(oauth);
+                return Task.CompletedTask;
+            },
+            CompletionHandler = result =>
+            {
+                if (result is Exception ex) completion.TrySetException(ex);
+            }
+        };
+        ModMain.WaitingMyMsgBox.Add(converter);
+        return completion.Task;
+    }
+
     public static object McLoginMojangUuid(string name, bool throwOnNotFound)
     {
         if (string.IsNullOrWhiteSpace(name)) return ModBase.StrFill("", "0", 32);

@@ -329,7 +329,8 @@ public static class ModMain
         Input,
         AuthServer,
         Login,
-        Markdown
+        Markdown,
+        MsWeb
     }
 
     private static string GetDefaultDialogTitle() => Lang.Text("Common.Dialog.Title");
@@ -717,6 +718,11 @@ public static class ModMain
                     case MyMsgBoxType.Markdown:
                     {
                         frmMain.PanMsg.Children.Add(new MyMsgMarkdown(WaitingMyMsgBox[0]));
+                        break;
+                    }
+                    case MyMsgBoxType.MsWeb:
+                    {
+                        frmMain.PanMsg.Children.Add(new MyMsgMsWeb(WaitingMyMsgBox[0]));
                         break;
                     }
                 }

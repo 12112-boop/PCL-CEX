@@ -347,3 +347,7 @@ MaskFiles/
 
 **/.DS_Storebuild/
 build/
+
+# Local build output
+publish-x64/
+build/publish-x64/

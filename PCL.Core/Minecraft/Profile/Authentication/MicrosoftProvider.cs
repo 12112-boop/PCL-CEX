@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -20,6 +20,7 @@ namespace PCL.Core.Minecraft.Profile.Authentication;
 /// </summary>
 public sealed class MicrosoftProvider : IAuthenticateProvider
 {
+    // 使用 /consumers 端点，支持个人 Microsoft 账户
     private const string DeviceEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode";
     private const string TokenEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
 

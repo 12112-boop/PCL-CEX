@@ -9,7 +9,7 @@ public static class Secrets
 {
     /// <summary>
     /// 微软 OAuth 的 Client ID。
-    /// 优先使用环境变量 MS_CLIENT_ID，其次使用公开可用的 Client ID（与 HMCL、Prism Launcher 等一致）。
+    /// 优先使用环境变量 MS_CLIENT_ID，其次使用 Azure Portal 注册的应用 ID。
     /// </summary>
     public static string MSOAuthClientId
     {
@@ -25,8 +25,8 @@ public static class Secrets
             if (!string.IsNullOrWhiteSpace(debugValue))
                 return debugValue;
 
-            // 3. 公开可用的 Client ID（Prism Launcher 等开源项目使用）
-            return "c4c8f8d0-4e7a-4a4e-9b6f-6c8d5e4b3a2f";
+            // 3. Prism Launcher 的公开 Client ID（第三方多租户应用，支持个人账户 + XboxLive.signin）
+            return "c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb";
         }
     }
 

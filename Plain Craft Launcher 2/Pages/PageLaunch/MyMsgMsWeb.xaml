@@ -1,0 +1,91 @@
+<Grid x:Class="PCL.MyMsgMsWeb"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="clr-namespace:PCL"
+      xmlns:controls="clr-namespace:PCL.Core.UI.Controls;assembly=PCL.Core"
+      xmlns:web="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+      RenderTransformOrigin="0,0.5" UseLayoutRounding="True" SnapsToDevicePixels="True"
+      MinWidth="560" MaxWidth="720" MaxHeight="392"
+      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="24,14">
+    <Grid.RenderTransform>
+        <TransformGroup>
+            <RotateTransform x:Name="TransformRotate" Angle="0" />
+            <TranslateTransform x:Name="TransformPos" X="0" Y="50" />
+        </TransformGroup>
+    </Grid.RenderTransform>
+    <controls:BlurBorder Name="PanBorder" CornerRadius="8"
+                         Background="{DynamicResource ColorBrushBackground}"
+                         MouseLeftButtonDown="Drag">
+        <controls:BlurBorder.Effect>
+            <DropShadowEffect Color="{DynamicResource ColorObjectMsgBoxShadow}" BlurRadius="20" ShadowDepth="4"
+                              RenderingBias="Performance" Opacity="0.8" x:Name="EffectShadow" />
+        </controls:BlurBorder.Effect>
+        <Grid Name="PanMain" Margin="22,14,22,14">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" FontSize="20" TextTrimming="None"
+                       Foreground="{DynamicResource ColorBrush2}"
+                       HorizontalAlignment="Left" Name="LabTitle" Margin="6,-1,60,7"
+                       Text="{DynamicResource Launch.Account.LoginDialog.MsWeb.Title}"
+                       VerticalAlignment="Top" SnapsToDevicePixels="False" UseLayoutRounding="False"
+                       MouseLeftButtonDown="Drag" />
+
+            <Rectangle x:Name="ShapeLine" Grid.Row="1" Height="2"
+                       Fill="{Binding Foreground, ElementName=LabTitle}" />
+
+            <TextBlock Grid.Row="2" x:Name="LabCaption" Margin="6,8,6,6" FontSize="12.5" LineHeight="17"
+                       Foreground="{DynamicResource ColorBrush1}" TextWrapping="Wrap"
+                       Text="{DynamicResource Launch.Account.LoginDialog.MsWeb.Instructions}" />
+
+            <Grid Grid.Row="3" Margin="6,0,6,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" x:Name="LabCode" VerticalAlignment="Center" FontSize="13"
+                           TextWrapping="Wrap" Foreground="{DynamicResource ColorBrush1}" />
+                <local:MyButton Grid.Column="1" ColorType="Normal" x:FieldModifier="public"
+                                Text="{DynamicResource Launch.Account.LoginDialog.CopyCode}" x:Name="BtnCopy"
+                                Margin="12,0,0,0" TextPadding="7" SnapsToDevicePixels="False" Padding="5,0"
+                                UseLayoutRounding="False" Click="BtnCopy_Click" />
+            </Grid>
+
+            <Border Grid.Row="4" CornerRadius="6" MinHeight="140"
+                    Background="{DynamicResource ColorBrushBackground}">
+                <Grid>
+                    <web:WebView2 x:Name="WebView" Visibility="Collapsed" />
+                    <local:MyLoading x:Name="Loading" Margin="10" HorizontalAlignment="Center"
+                                     VerticalAlignment="Center" Visibility="Visible" />
+                </Grid>
+            </Border>
+
+            <StackPanel Grid.Row="5" Name="PanStatus" Orientation="Horizontal" Margin="6,8,6,0"
+                        VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed">
+                <local:MyLoading Margin="0,0,8,0" Width="16" Height="16" />
+                <TextBlock x:Name="LabStatus" VerticalAlignment="Center" FontSize="12.5"
+                           Foreground="{DynamicResource ColorBrush1}"
+                           Text="{DynamicResource Launch.Account.LoginDialog.MsWeb.Waiting}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="6" Name="PanBtn" VerticalAlignment="Top" HorizontalAlignment="Right"
+                        Margin="0,10,0,0" Orientation="Horizontal">
+                <local:MyButton ColorType="Normal" x:FieldModifier="public"
+                                Text="{DynamicResource Launch.Account.LoginDialog.MsWeb.OpenBrowser}" x:Name="BtnOpen"
+                                Margin="12,0,0,0" TextPadding="7" SnapsToDevicePixels="False" Padding="5,0"
+                                UseLayoutRounding="False" Click="BtnOpen_Click" />
+                <local:MyButton ColorType="Normal" x:FieldModifier="public"
+                                Text="{DynamicResource Common.Action.Cancel}" x:Name="BtnCancel"
+                                Margin="12,0,0,0" TextPadding="7" SnapsToDevicePixels="False" Padding="5,0"
+                                UseLayoutRounding="False" Click="BtnCancel_Click" />
+            </StackPanel>
+        </Grid>
+    </controls:BlurBorder>
+</Grid>

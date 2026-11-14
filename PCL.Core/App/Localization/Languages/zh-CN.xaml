@@ -1577,6 +1577,16 @@
     <sys:String x:Key="Launch.Account.LoginDialog.Success">网页登录成功！</sys:String>
     <sys:String x:Key="Launch.Account.LoginDialog.Title">测试标题文本</sys:String>
 
+    <!-- Launch.Account.LoginDialog.MsWeb -->
+
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.Title">登录 Microsoft 账号</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.Instructions">在下方窗口中登录你的微软账号，以验证 Minecraft 正版授权。登录成功后会自动关闭此窗口。</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.Waiting">登录中，请稍候…</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.OpenBrowser">在浏览器中打开</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.InitError">登录弹窗初始化失败</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.CodeCopied">设备码 {0} 已复制，请粘贴到下方窗口中</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.CodeMissing">未能获取设备码，请点击「在浏览器中打开」重试</sys:String>
+
     <!-- Launch.Account.Microsoft -->
 
     <sys:String x:Key="Launch.Account.Microsoft.Error.OperationFailed">Microsoft 登录操作失败。请查看错误详情。</sys:String>

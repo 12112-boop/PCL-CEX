@@ -687,7 +687,7 @@ public static class ModLaunch
             stored = ProfileService.AuthenticateAsync(ProfileType.Microsoft, new AuthenticationRequest
             {
                 ForceRefresh = data.isForceRestarting,
-                DeviceCodeHandler = ProfileUi.ShowDeviceCodeLoginAsync,
+                DeviceCodeHandler = ProfileUi.ShowMsWebLoginAsync,
                 RefreshFailureHandler = _ConfirmMicrosoftRefreshFailureAsync
             }, existing, select: true, data.AbortedToken).GetAwaiter().GetResult();
         }

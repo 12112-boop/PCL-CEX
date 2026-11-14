@@ -1577,6 +1577,16 @@
     <sys:String x:Key="Launch.Account.LoginDialog.Success">Successfully logged in from the webpage!</sys:String>
     <sys:String x:Key="Launch.Account.LoginDialog.Title">Test title text</sys:String>
 
+    <!-- Launch.Account.LoginDialog.MsWeb -->
+
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.Title">Log in to Microsoft</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.Instructions">Sign in with your Microsoft account below to verify your Minecraft license. This window will close automatically after a successful login.</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.Waiting">Logging in, please wait…</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.OpenBrowser">Open in browser</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.InitError">Failed to initialize login dialog</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.CodeCopied">Code {0} copied. Paste it into the window below.</sys:String>
+    <sys:String x:Key="Launch.Account.LoginDialog.MsWeb.CodeMissing">Failed to get the device code. Click "Open in browser" to retry.</sys:String>
+
     <!-- Launch.Account.Microsoft -->
 
     <sys:String x:Key="Launch.Account.Microsoft.Error.OperationFailed">A Microsoft sign-in operation failed. See the details below.</sys:String>
