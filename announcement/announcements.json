@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updated": "2026-11-14T16:30:00Z",
+  "updated": "2026-11-15T01:46:02Z",
   "items": [
     {
-      "id": "20261114-02",
-      "title": "PCL-CEX v2.16.2 已发布",
-      "content": "本次更新重点**重做了微软正版登录**，同时修复了公告栏消失的问题。\n\n### 微软正版登录（重点）\n\n- **改用 Prism Launcher 公开 Client ID**，支持个人 Microsoft 账户，修复了 AADSTS700016 错误\n- **新增内嵌 WebView2 登录弹窗**：在启动器窗口内完成登录，无需跳出浏览器\n- **设备码自动复制**：弹窗打开时自动写入剪贴板，也可手动点击「复制代码」按钮\n- **滑动式弹窗动画**：从底部滑入、向下滑出，配合淡入淡出效果\n\n### 公告栏修复\n\n- 恢复了被误删的公告栏 UI（悬浮在启动页右上角）\n- 补回了 `AnnouncementBoardCollapsed` 配置项\n- 公告栏支持折叠/展开，点击喇叭图标可查看历史公告\n\n### 下载\n\n[前往 Releases 页面下载 v2.16.2](https://github.com/12112-boop/PCL-CEX/releases/tag/v2.16.2)\n\n> 旧版本可以在「设置 → 更新」里一键检查更新。",
-      "level": "important",
+      "id": "20261115-01",
+      "title": "请立即更新",
+      "content": "请立即更新，新版本重新修复正版账号登录",
+      "level": "warning",
       "pinned": true,
-      "time": "2026-11-14 23:30",
+      "time": "2026-11-15 09:44",
       "expire": ""
     }
   ]
