@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updated": "2026-11-15T01:46:25Z",
+  "updated": "2026-11-15T09:57:00Z",
   "items": [
     {
       "id": "20261115-01",
-      "title": "请立即更新",
-      "content": "请立即更新，2.16.2版本重新修复正版账号登录",
-      "level": "warning",
+      "title": "PCL-CEX v2.16.3 已发布",
+      "content": "修复了**检查更新时界面卡死/崩溃**的问题。\n\n### 修复内容\n\n- 修复 `BtnUpdate_Timer` 在 UI 线程上死循环阻塞的问题\n- 改为使用 `async/await` 非阻塞方式更新进度条\n\n> 此版本同时保留了 v2.16.2 的所有功能（内嵌微软登录、公告栏等）。",
+      "level": "important",
       "pinned": true,
-      "time": "2026-11-15 09:44",
+      "time": "2026-11-15 09:57",
       "expire": ""
     }
   ]

@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using PCL.Core.App;
@@ -148,12 +148,19 @@ public partial class PageSetupUpdate
         }
     }
 
-    public void BtnUpdate_Timer()
+    public async void BtnUpdate_Timer()
     {
         while (UpdateManager.updateLoader is not null && UpdateManager.updateLoader.State == ModBase.LoadState.Loading)
         {
-            ModBase.RunInUi(() => BtnUpdate.Text = Lang.Number(UpdateManager.updateLoader.Progress, "P2"));
-            Thread.Sleep(200);
+            BtnUpdate.Text = Lang.Number(UpdateManager.updateLoader.Progress, "P2");
+            try
+            {
+                await Task.Delay(200);
+            }
+            catch (TaskCanceledException)
+            {
+                break;
+            }
         }
     }
 
