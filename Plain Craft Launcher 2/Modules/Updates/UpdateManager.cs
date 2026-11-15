@@ -96,6 +96,13 @@ public static class UpdateManager
                     // 构造步骤加载器
                 }
 
+                // 重置旧的更新加载器，避免状态残留
+                if (updateLoader is not null)
+                {
+                    updateLoader.Abort();
+                    updateLoader = null;
+                }
+
                 var loaders = new List<ModLoader.LoaderBase>();
                 // 下载
                 loaders.AddRange(remoteServer.GetDownloadLoader(
