@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-17T12:20:17Z",
+  "updated": "2026-11-17T12:24:39Z",
   "items": [
     {
       "id": "20261115-02",
@@ -9,6 +9,15 @@
       "level": "important",
       "pinned": true,
       "time": "2026-11-15 10:27",
+      "expire": ""
+    },
+    {
+      "id": "20261117-01",
+      "title": "新公告",
+      "content": "gggggggggggggggggggggggggggggggggggggggggggggggggggGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+      "level": "warning",
+      "pinned": false,
+      "time": "2026-11-17 20:24",
       "expire": ""
     }
   ]
