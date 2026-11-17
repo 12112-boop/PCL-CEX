@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-17T12:19:50Z",
+  "updated": "2026-11-17T12:20:17Z",
   "items": [
     {
       "id": "20261115-02",
@@ -9,15 +9,6 @@
       "level": "important",
       "pinned": true,
       "time": "2026-11-15 10:27",
-      "expire": ""
-    },
-    {
-      "id": "20261117-01",
-      "title": "咕咕咕",
-      "content": "",
-      "level": "info",
-      "pinned": false,
-      "time": "2026-11-17 20:19",
       "expire": ""
     }
   ]
